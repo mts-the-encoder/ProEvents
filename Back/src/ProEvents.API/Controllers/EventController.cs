@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ProEvents.API.Data;
 using ProEvents.API.Models;
 
 namespace ProEvents.API.Controllers;
@@ -7,8 +8,10 @@ namespace ProEvents.API.Controllers;
 [Route("api/[controller]")]
 public class EventController : ControllerBase
 {
-    public EventController()
+    private readonly DataContext _context;
+    public EventController(DataContext context)
     {
+        _context = context;
     }
 
     public IEnumerable<Event> _event = new Event[]
