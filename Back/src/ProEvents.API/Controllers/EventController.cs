@@ -14,39 +14,16 @@ public class EventController : ControllerBase
         _context = context;
     }
 
-    public IEnumerable<Event> _event = new Event[]
-    {
-        new Event()
-        {
-            EventId = 1,
-            Theme = ".NET",
-            Place = "SP",
-            Lot = "1st Lot",
-            QtdPeoples = 505,
-            EventDate = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
-            ImageURL = "photo.png"
-        },
-        new Event()
-        {
-            EventId = 2,
-            Theme = "Angular",
-            Place = "RJ",
-            Lot = "2st Lot",
-            QtdPeoples = 250,
-            EventDate = DateTime.Now.AddDays(7).ToString("dd/MM/yyyy"),
-            ImageURL = "profile.png"
-        }
-    };
-
     [HttpGet]
     public IEnumerable<Event> Get()
     {
-        return _event;
+        return _context.Events;
     }
 
     [HttpGet("{id}")]
-    public IEnumerable<Event> GetById(int id)
+    public Event GetById(int id)
     {
-        return _event.Where(x => x.EventId == id);
+        return _context.Events.FirstOrDefault(x => x.EventId == id);
     }
+
 }
