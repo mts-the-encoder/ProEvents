@@ -23,7 +23,6 @@ public class EventController : ControllerBase
             EventDate = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
             ImageURL = "photo.png"
         },
-
         new Event()
         {
             EventId = 2,
