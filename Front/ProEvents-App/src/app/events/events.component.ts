@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventsComponent implements OnInit {
 
+  public events: any = [
+    {
+      Theme: 'SQL Server',
+      City: 'SP'
+    },
+    {
+      Theme: '.NET',
+      City: 'SP'
+    },
+    {
+      Theme: 'Angular',
+      City: 'SP'
+    }
+  ]
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }
