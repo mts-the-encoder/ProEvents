@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mnsantos4\\Desktop\\FullStack\\FullStack-Application\\Back\\src\\ProEvents.API\\ProEvents.API.csproj": {}
+    "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.API\\ProEvents.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mnsantos4\\Desktop\\FullStack\\FullStack-Application\\Back\\src\\ProEvents.API\\ProEvents.API.csproj": {
+    "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.API\\ProEvents.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\FullStack-Application\\Back\\src\\ProEvents.API\\ProEvents.API.csproj",
+        "projectUniqueName": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.API\\ProEvents.API.csproj",
         "projectName": "ProEvents.API",
-        "projectPath": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\FullStack-Application\\Back\\src\\ProEvents.API\\ProEvents.API.csproj",
+        "projectPath": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.API\\ProEvents.API.csproj",
         "packagesPath": "C:\\Users\\mnsantos4\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\FullStack-Application\\Back\\src\\ProEvents.API\\obj\\",
+        "outputPath": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
