@@ -1,8 +1,37 @@
-<h1>events works!</h1>
-
-
-<div *ngFor="let event of events">
-  <p><b>Theme: </b>{{event.theme}}</p>
-  <p><b>Local: </b>{{event.place}}</p>
-  <hr>
-</div>
+<h2>Events</h2>
+<hr>
+<form class="row g-3">
+  <div class="col-auto">
+    <label for="search" class="visually-hidden">Search</label>
+    <input type="text" class="form-control" placeholder="Search">
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-outline-success">Search</button>
+  </div>
+</form>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>#</th>
+      <th>Image</th>
+      <th>Theme</th>
+      <th>Place</th>
+      <th>Date</th>
+      <th>Participants</th>
+      <th>Lot</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
