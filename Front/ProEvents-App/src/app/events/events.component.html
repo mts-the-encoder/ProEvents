@@ -5,12 +5,12 @@
     <label for="search" class="visually-hidden">Search</label>
     <input type="text" class="form-control" placeholder="Search">
   </div>
-  <div class="col-auto">
+  <div class="col-auto mb-3">
     <button class="btn btn-outline-success">Search</button>
   </div>
 </form>
 <table class="table table-striped">
-  <thead class="thead-dark">
+  <thead class="table-dark">
     <tr>
       <th>#</th>
       <th>Image</th>
@@ -23,15 +23,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr *ngFor="let event of events">
+      <td>{{event.eventId}}</td>
+      <td>{{event.imageURL}}</td>
+      <td>{{event.theme}}</td>
+      <td>{{event.place}}</td>
+      <td>{{event.eventDate}}</td>
+      <td>{{event.qtdPeoples}}</td>
+      <td>{{event.lot}}</td>
+      <td>-</td>
     </tr>
   </tbody>
 </table>
