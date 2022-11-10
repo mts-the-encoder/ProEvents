@@ -12,8 +12,10 @@
 <table class="table table-striped">
   <thead class="table-dark">
     <tr>
+      <th>
+        <button class="btn btn-outline-light btn-sm" (click)="changeImg()">{{!showImg ? 'Hide' : 'Show'}}</button>
+      </th>
       <th>#</th>
-      <th>Image</th>
       <th>Theme</th>
       <th>Place</th>
       <th>Date</th>
@@ -24,16 +26,17 @@
   </thead>
   <tbody *ngIf="events && events.length">
     <tr *ngFor="let event of events">
-      <td>{{event.eventId}}</td>
       <td>
-        <img
-          src="/assets/{{event.imageURL}}"
-          alt="Event photo"
-          [style.width.px]="widthImg"
-          [style.margin.px]="marginImg"
-          [style.border-radius.px]="5"
-          >
+        <img [collapse]="showImg"
+        [isAnimated]="true"
+        src="/assets/{{event.imageURL}}"
+        alt="Event photo"
+        [style.width.px]="widthImg"
+        [style.margin.px]="marginImg"
+        [style.border-radius.px]="5"
+        >
       </td>
+      <td>{{event.eventId}}</td>
       <td>{{event.theme}}</td>
       <td>{{event.place}}</td>
       <td>{{event.eventDate}}</td>
