@@ -1,12 +1,12 @@
 <h2>Events</h2>
 <hr>
 <div class="row g-3">
+  <div class="col-auto mb-3">
+    <label class="col-form-label mr-2">Filter: </label>
+  </div>
   <div class="col-auto">
     <label for="search" class="visually-hidden">Search</label>
     <input type="text" class="form-control mr-2" placeholder="Search" [(ngModel)]="listFilter">
-  </div>
-  <div class="col-auto mb-3">
-    <button class="btn btn-outline-success">Search</button>
   </div>
 </div>
 <h3>Filter: {{listFilter}}</h3>
@@ -43,7 +43,10 @@
       <td>{{event.eventDate}}</td>
       <td>{{event.qtdPeoples}}</td>
       <td>{{event.lot}}</td>
-      <td>-</td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm m-1">Edit</button>
+        <button type="button" class="btn btn-danger btn-sm m-1">Delete</button>
+      </td>
     </tr>
   </tbody>
   <tfoot *ngIf="!events.length">
