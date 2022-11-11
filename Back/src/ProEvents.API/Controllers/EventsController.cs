@@ -19,11 +19,4 @@ public class EventsController : ControllerBase
     {
         return _context.Events;
     }
-
-    [HttpGet("{id}")]
-    public Event GetById(int id)
-    {
-        return _context.Events.FirstOrDefault(x => x.EventId == id);
-    }
-
 }

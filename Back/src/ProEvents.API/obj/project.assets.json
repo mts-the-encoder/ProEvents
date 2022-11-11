@@ -679,7 +679,10 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "ProEvents.Domain": "1.0.0"
+          "Microsoft.EntityFrameworkCore": "6.0.10",
+          "Microsoft.EntityFrameworkCore.Sqlite": "6.0.10",
+          "ProEvents.Domain": "1.0.0",
+          "Swashbuckle.AspNetCore": "6.2.3"
         },
         "compile": {
           "bin/placeholder/ProEvents.Persistence.dll": {}
