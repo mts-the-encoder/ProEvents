@@ -650,6 +650,43 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "ProEvents.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "ProEvents.Domain": "1.0.0",
+          "ProEvents.Persistence": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ProEvents.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ProEvents.Application.dll": {}
+        }
+      },
+      "ProEvents.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/ProEvents.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ProEvents.Domain.dll": {}
+        }
+      },
+      "ProEvents.Persistence/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "ProEvents.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ProEvents.Persistence.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ProEvents.Persistence.dll": {}
+        }
       }
     }
   },
@@ -1461,6 +1498,21 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "ProEvents.Application/1.0.0": {
+      "type": "project",
+      "path": "../ProEvents.Application/ProEvents.Application.csproj",
+      "msbuildProject": "../ProEvents.Application/ProEvents.Application.csproj"
+    },
+    "ProEvents.Domain/1.0.0": {
+      "type": "project",
+      "path": "../ProEvents.Domain/ProEvents.Domain.csproj",
+      "msbuildProject": "../ProEvents.Domain/ProEvents.Domain.csproj"
+    },
+    "ProEvents.Persistence/1.0.0": {
+      "type": "project",
+      "path": "../ProEvents.Persistence/ProEvents.Persistence.csproj",
+      "msbuildProject": "../ProEvents.Persistence/ProEvents.Persistence.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1469,6 +1521,7 @@
       "Microsoft.EntityFrameworkCore.Design >= 6.0.10",
       "Microsoft.EntityFrameworkCore.Sqlite >= 6.0.10",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.10",
+      "ProEvents.Application >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -1479,11 +1532,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.API\\ProEvents.API.csproj",
+      "projectUniqueName": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.Api\\ProEvents.API.csproj",
       "projectName": "ProEvents.API",
-      "projectPath": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.API\\ProEvents.API.csproj",
+      "projectPath": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.Api\\ProEvents.API.csproj",
       "packagesPath": "C:\\Users\\mnsantos4\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.API\\obj\\",
+      "outputPath": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1504,7 +1557,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.Application\\ProEvents.Application.csproj": {
+              "projectPath": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.Application\\ProEvents.Application.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

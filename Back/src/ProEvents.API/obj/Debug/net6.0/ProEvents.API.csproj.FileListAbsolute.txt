@@ -108,3 +108,9 @@ C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.API\obj\Debug\
 C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.API\obj\Debug\net6.0\ProEvents.API.pdb
 C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.API\obj\Debug\net6.0\ProEvents.API.genruntimeconfig.cache
 C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.API\obj\Debug\net6.0\ref\ProEvents.API.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\ProEvents.Application.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\ProEvents.Domain.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\ProEvents.Persistence.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\ProEvents.Application.pdb
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\ProEvents.Domain.pdb
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\ProEvents.Persistence.pdb
