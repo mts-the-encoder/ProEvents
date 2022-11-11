@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using ProEvents.API.Data;
+using ProEvents.Persistence;
 
 namespace ProEvents.API
 {
@@ -18,7 +18,7 @@ namespace ProEvents.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(context => context
+            services.AddDbContext<ProEventsContext>(context => context
                 .UseSqlite(Configuration.GetConnectionString("Default")));
             services.AddControllers();
             services.AddCors();
