@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProEvents.API.Data;
-using ProEvents.API.Models;
+using ProEvents.Domain;
 
 namespace ProEvents.API.Controllers;
 

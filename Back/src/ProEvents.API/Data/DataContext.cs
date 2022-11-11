@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProEvents.API.Models;
+using ProEvents.Domain;
 
 namespace ProEvents.API.Data
 {
