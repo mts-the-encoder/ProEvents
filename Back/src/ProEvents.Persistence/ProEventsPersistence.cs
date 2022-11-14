@@ -7,10 +7,11 @@ using System.Xml.Linq;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using ProEvents.Domain;
+using ProEvents.Persistence.contracts;
 
 namespace ProEvents.Persistence
 {
-    public class ProEventsPersistence : IProEventsPersistence
+    public class ProEventsPersistence : ISpeakerPersist
     {
         private readonly ProEventsContext _context;
 
