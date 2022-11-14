@@ -6,10 +6,10 @@ namespace ProEvents.Application.Contracts
     {
         Task<Event> AddEvents(Event model);
         Task<Event> UpdateEvent(int eventId,Event model);
-        Task<Event> DeleteEvent(int eventId);
+        Task<bool> DeleteEvent(int eventId);
 
         Task<Event[]> GetAllEventsAsync(bool includeSpeakers = false);
-        Task<Event[]> GetAllEventsByThemeAsync(string theme,bool includeSpeakers = false);
-        Task<Event> GetEventsByIdAsync(int eventId,bool includeSpeakers = false);
+        Task<Event[]> GetAllEventsByThemeAsync(string theme, bool includeSpeakers = false);
+        Task<Event> GetEventsByIdAsync(int eventId ,bool includeSpeakers = false);
     }
 }
