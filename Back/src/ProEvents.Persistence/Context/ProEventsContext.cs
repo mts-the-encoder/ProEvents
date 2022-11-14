@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProEvents.Domain;
 
-namespace ProEvents.Persistence
+namespace ProEvents.Persistence.Context
 {
     public class ProEventsContext : DbContext
     {
-        public ProEventsContext(DbContextOptions<ProEventsContext> options) 
+        public ProEventsContext(DbContextOptions<ProEventsContext> options)
             : base(options) { }
         public DbSet<Event> Events { get; set; }
         public DbSet<Lot> Lots { get; set; }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProEvents.Domain;
-using ProEvents.Persistence;
+using ProEvents.Persistence.Context;
 
 namespace ProEvents.API.Controllers;
 
