@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using ProEvents.Domain;
 
 namespace ProEvents.Persistence
@@ -40,32 +42,60 @@ namespace ProEvents.Persistence
             return (await _context.SaveChangesAsync()) > 0;
         }
 
-        public Task<Event[]> GetAllEventsByThemeAsync(string theme, bool includeSpeakers)
+        public async Task<Event[]> GetAllEventsByThemeAsync(string theme, bool includeSpeakers = false)
+        {
+            IQueryable<Event> query = _context.Events
+                .Include(x => x.Lots)
+                .Include(x => x.SocialMedias);
+
+            if (includeSpeakers)
+                query = query.Include(x => x.EventsSpeakers).ThenInclude(x => x.Speaker);
+
+            query = query.OrderBy(x => x.Id)
+                .Where(x => x.Theme.ToLower().Contains(theme.ToLower()));
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Event[]> GetAllEventsAsync(bool includeSpeakers = false)
+        {
+            IQueryable<Event> query = _context.Events
+                .Include(x => x.Lots)
+                .Include(x => x.SocialMedias);
+
+            if (includeSpeakers)
+                query = query.Include(x => x.EventsSpeakers).ThenInclude(x => x.Speaker);
+
+            query = query.OrderBy(x => x.Id);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Event> GetEventsByIdAsync(int eventId, bool includeSpeakers = false)
+        {
+            IQueryable<Event> query = _context.Events
+                .Include(x => x.Lots)
+                .Include(x => x.SocialMedias);
+
+            if (includeSpeakers)
+                query = query.Include(x => x.EventsSpeakers).ThenInclude(x => x.Speaker);
+
+            query = query.OrderBy(x => x.Id).Where(x => x.Id == eventId);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Speaker[]> GetAllSpeakersByNameAsync(string name, bool includeEvents = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Event[]> GetAllEventsAsync(bool includeSpeakers)
+        public async Task<Speaker[]> GetAllSpeakersAsync(bool includeEvents = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Event> GetEventsByIdAsync(int eventId, bool includeSpeakers)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Speaker[]> GetAllSpeakersByNameAsync(string name, bool includeEvents)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Speaker[]> GetAllSpeakersAsync(bool includeEvents)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Speaker> GetSpeakersByIdAsync(int speakerId, bool includeEvents)
+        public async Task<Speaker> GetSpeakersByIdAsync(int speakerId, bool includeEvents = false)
         {
             throw new NotImplementedException();
         }
