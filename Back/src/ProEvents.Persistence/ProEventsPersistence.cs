@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using ProEvents.Domain;
@@ -12,6 +13,7 @@ namespace ProEvents.Persistence
     public class ProEventsPersistence : IProEventsPersistence
     {
         private readonly ProEventsContext _context;
+
         public ProEventsPersistence(ProEventsContext context)
         {
             _context = context;
@@ -42,7 +44,7 @@ namespace ProEvents.Persistence
             return (await _context.SaveChangesAsync()) > 0;
         }
 
-        public async Task<Event[]> GetAllEventsByThemeAsync(string theme, bool includeSpeakers = false)
+        public async Task<Event[]> GetAllEventsByThemeAsync(string theme,bool includeSpeakers = false)
         {
             IQueryable<Event> query = _context.Events
                 .Include(x => x.Lots)
@@ -71,7 +73,7 @@ namespace ProEvents.Persistence
             return await query.ToArrayAsync();
         }
 
-        public async Task<Event> GetEventsByIdAsync(int eventId, bool includeSpeakers = false)
+        public async Task<Event> GetEventsByIdAsync(int eventId,bool includeSpeakers = false)
         {
             IQueryable<Event> query = _context.Events
                 .Include(x => x.Lots)
@@ -85,19 +87,47 @@ namespace ProEvents.Persistence
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Speaker[]> GetAllSpeakersByNameAsync(string name, bool includeEvents = false)
+        public async Task<Speaker[]> GetAllSpeakersByNameAsync(string name,bool includeEvents = false)
         {
-            throw new NotImplementedException();
+            IQueryable<Speaker> query = _context.Speakers
+                .Include(x => x.SocialMedias);
+
+            if (includeEvents)
+                query = query.Include(x => x.EventsSpeakers).ThenInclude(x => x.Event);
+
+            query = query.OrderBy(x => x.Id)
+                .Where(x => x.Name.ToLower().Contains(name.ToLower()));
+
+            return await query.ToArrayAsync();
         }
 
         public async Task<Speaker[]> GetAllSpeakersAsync(bool includeEvents = false)
         {
-            throw new NotImplementedException();
+            IQueryable<Speaker> query = _context.Speakers
+                .Include(x => x.SocialMedias);
+
+            if (includeEvents)
+                query = query.Include(x => x.EventsSpeakers).ThenInclude(x => x.Event);
+
+            query = query.OrderBy(x => x.Id);
+
+            return await query.ToArrayAsync();
         }
 
-        public async Task<Speaker> GetSpeakersByIdAsync(int speakerId, bool includeEvents = false)
+        public async Task<Speaker> GetSpeakersByIdAsync(int speakerId,bool includeEvents = false)
         {
-            throw new NotImplementedException();
+            IQueryable<Speaker> query = _context.Speakers
+                .Include(x => x.SocialMedias);
+
+            if (includeEvents)
+                query = query.Include(x => x.EventsSpeakers).ThenInclude(x => x.Event);
+
+            query = query.OrderBy(x => x.Id)
+                .Where(x => x.Id == speakerId);
+
+            return await query.FirstOrDefaultAsync();
         }
     }
+
 }
+
