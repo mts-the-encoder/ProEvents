@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProEvents.Application.Contracts;
+using ProEvents.Domain;
 
 namespace ProEvents.API.Controllers;
 
@@ -65,6 +66,57 @@ public class EventsController : ControllerBase
         {
             return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Error trying to retrieve events. Error: {e.Message}");
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post(Event model)
+    {
+        try
+        {
+            var res = await _service.AddEvents(model);
+
+            if (res == null) return BadRequest("Error to create event");
+
+            return Ok(res);
+        }
+        catch (Exception e)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Error trying to create events. Error: {e.Message}");
+        }
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, Event model)
+    {
+        try
+        {
+            var res = await _service.UpdateEvent(id, model);
+
+            if (res == null) return BadRequest("Error to update event");
+
+            return Ok(res);
+        }
+        catch (Exception e)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Error trying to update events. Error: {e.Message}");
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+            return await _service.DeleteEvent(id) ? Ok("Deleted") : 
+                BadRequest("Event not found");
+        }
+        catch (Exception e)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Error trying to delete events. Error: {e.Message}");
         }
     }
 }
