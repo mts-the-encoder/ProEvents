@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using ProEvents.Application;
+using ProEvents.Application.Contracts;
+using ProEvents.Persistence;
 using ProEvents.Persistence.Context;
+using ProEvents.Persistence.contracts;
 
 namespace ProEvents.API
 {
@@ -21,6 +25,9 @@ namespace ProEvents.API
             services.AddDbContext<ProEventsContext>(context => context
                 .UseSqlite(Configuration.GetConnectionString("Default")));
             services.AddControllers();
+            services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IGeneralPersist, GeneralPersist>();
+            services.AddScoped<IEventPersist, EventPersist>();
             services.AddCors();
             services.AddSwaggerGen(c =>
             {

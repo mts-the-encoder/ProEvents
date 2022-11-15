@@ -3,11 +3,11 @@ using ProEvents.Persistence.contracts;
 
 namespace ProEvents.Persistence
 {
-    public class GeneralPersistence : IGeneralPersist
+    public class GeneralPersist : IGeneralPersist
     {
         private readonly ProEventsContext _context;
 
-        public GeneralPersistence(ProEventsContext context)
+        public GeneralPersist(ProEventsContext context)
         {
             _context = context;
         }

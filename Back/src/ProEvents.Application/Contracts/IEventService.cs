@@ -4,8 +4,8 @@ namespace ProEvents.Application.Contracts
 {
     public interface IEventService
     {
-        Task<Event> AddEvents(Event model);
-        Task<Event> UpdateEvent(int eventId,Event model);
+        Task<Event> AddEvents(Event? model);
+        Task<Event> UpdateEvent(int eventId, Event? model);
         Task<bool> DeleteEvent(int eventId);
 
         Task<Event[]> GetAllEventsAsync(bool includeSpeakers = false);

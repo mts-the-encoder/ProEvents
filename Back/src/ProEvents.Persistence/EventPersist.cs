@@ -5,16 +5,16 @@ using ProEvents.Persistence.contracts;
 
 namespace ProEvents.Persistence
 {
-    public class EventPersistence : IEventPersist
+    public class EventPersist : IEventPersist
     {
         private readonly ProEventsContext _context;
 
-        public EventPersistence(ProEventsContext context)
+        public EventPersist(ProEventsContext context)
         {
             _context = context;
         }
 
-        public async Task<Event[]> GetAllEventsByThemeAsync(string theme,bool includeSpeakers = false)
+        public async Task<Event[]> GetAllEventsByThemeAsync(string theme, bool includeSpeakers = false)
         {
             IQueryable<Event> query = _context.Events
                 .Include(x => x.Lots)
