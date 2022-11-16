@@ -24,14 +24,16 @@ namespace ProEvents.API
         {
             services.AddDbContext<ProEventsContext>(context => context
                 .UseSqlite(Configuration.GetConnectionString("Default")));
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(x => x.SerializerSettings
+                    .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IGeneralPersist, GeneralPersist>();
             services.AddScoped<IEventPersist, EventPersist>();
             services.AddCors();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1",new OpenApiInfo { Title = "ProEventos.API",Version = "v1" });
+                c.SwaggerDoc("v1",new OpenApiInfo { Title = "ProEvents.API",Version = "v1" });
             });
         }
 
@@ -41,7 +43,7 @@ namespace ProEvents.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json","ProEventos.API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json","ProEvents.API v1"));
             }
 
             app.UseHttpsRedirection();

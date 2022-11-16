@@ -9,6 +9,6 @@
         public DateTime? EndDate { get; set; }
         public int Qtd { get; set; }
         public int EventId { get; set; }
-        public Event Event { get; set; }
+        public Event? Event { get; set; }
     }
 }

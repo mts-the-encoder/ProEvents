@@ -114,3 +114,7 @@ C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\
 C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\ProEvents.Application.pdb
 C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\ProEvents.Domain.pdb
 C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\ProEvents.Persistence.pdb
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

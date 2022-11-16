@@ -19,7 +19,7 @@ namespace ProEvents.Application
         {
             try
             {
-                _generalPersist.Add(model);
+                _generalPersist.Add<Event>(model);
 
                 if (await _generalPersist.SaveChangesAsync())
                     return await _eventPersist.GetEventByIdAsync(model.Id, false);
@@ -45,7 +45,7 @@ namespace ProEvents.Application
                 _generalPersist.Update(model);
 
                 if (await _generalPersist.SaveChangesAsync())
-                    return await _eventPersist.GetEventByIdAsync(model.Id,false);
+                    return await _eventPersist.GetEventByIdAsync(model.Id, false);
 
                 return null;
 
