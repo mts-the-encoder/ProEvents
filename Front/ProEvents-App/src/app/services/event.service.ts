@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EventService {
   baseURL = 'https://localhost:7242/api/events';
   constructor(private http: HttpClient) { }
