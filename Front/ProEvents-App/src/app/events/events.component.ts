@@ -1,3 +1,4 @@
+import { Event } from '../models/Event';
 import { EventService } from './../services/event.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,14 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventsComponent implements OnInit {
 
-  public events: any = [];
-  public filteredEvents: any = [];
-  widthImg: number = 50;
-  marginImg: number = 2;
-  showImg: boolean = true;
-  private _listFilter: string = '';
+  public events: Event[] = [];
+  public filteredEvents: Event[] = [];
 
-  public get listFilter() {
+  public widthImg = 50;
+  public marginImg = 2;
+  public showImg = true;
+  private _listFilter = '';
+
+  public get listFilter(): string {
     return this._listFilter;
   }
 
@@ -24,29 +26,29 @@ export class EventsComponent implements OnInit {
     this.filteredEvents = this.listFilter ? this.filterEvent(this.listFilter) : this.events;
   }
 
-  filterEvent(filterBy: string): any {
+  filterEvent(filterBy: string): Event[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.events.filter((event: { theme: string; place: string; }) => event.theme.toLocaleLowerCase().indexOf(filterBy) !== -1 ||
-      event.place.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    return this.events.filter((event: { theme: string; local: string; }) => event.theme.toLocaleLowerCase().indexOf(filterBy) !== -1 ||
+      event.local.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
   constructor(private eventService: EventService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getEvents();
   }
 
-  changeImg() {
+  public changeImg(): void {
     this.showImg = !this.showImg;
   }
 
   public getEvents(): void {
-    this.eventService.getEvent().subscribe(
-      response => {
-        this.events = response;
-        this.filteredEvents = this.events
+    this.eventService.getEvent().subscribe({
+      next: (eventsRes: Event[]) => {
+        this.events = eventsRes;
+        this.filteredEvents = this.events;
       },
-      error => console.log(error)
-    );
+      error: (error: any) => console.log(error)
+    });
   }
 }
