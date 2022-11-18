@@ -28,7 +28,9 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     CollapseModule.forRoot(),
     FormsModule
   ],
-  providers: [EventService],
+  providers: [
+    EventService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
