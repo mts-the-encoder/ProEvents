@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { EventService } from './../services/event.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,7 +13,7 @@ export class EventsComponent implements OnInit {
   widthImg: number = 50;
   marginImg: number = 2;
   showImg: boolean = true;
-  private _listFilter : string = '';
+  private _listFilter: string = '';
 
   public get listFilter() {
     return this._listFilter;
@@ -27,10 +27,10 @@ export class EventsComponent implements OnInit {
   filterEvent(filterBy: string): any {
     filterBy = filterBy.toLocaleLowerCase();
     return this.events.filter((event: { theme: string; place: string; }) => event.theme.toLocaleLowerCase().indexOf(filterBy) !== -1 ||
-    event.place.toLocaleLowerCase().indexOf(filterBy) !== -1);
+      event.place.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
     this.getEvents();
@@ -41,12 +41,12 @@ export class EventsComponent implements OnInit {
   }
 
   public getEvents(): void {
-    this.http.get('https://localhost:7242/api/events').subscribe(
+    this.eventService.getEvent().subscribe(
       response => {
         this.events = response;
         this.filteredEvents = this.events
       },
       error => console.log(error)
-      );
+    );
   }
 }
