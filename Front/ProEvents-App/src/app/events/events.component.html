@@ -52,7 +52,7 @@
         <button type="button" class="btn btn-primary btn-sm m-1" tooltipHtml="Edit">
           <i class="fa fa-edit"></i>
         </button>
-        <button type="button" class="btn btn-danger btn-sm m-1" tooltip="Delete">
+        <button type="button" class="btn btn-danger btn-sm m-1" tooltip="Delete" (click)="openModal(template)">
           <i class="fa fa-trash"></i>
         </button>
       </td>
@@ -66,6 +66,14 @@
     </tr>
   </tfoot>
 </table>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+  </div>
+</ng-template>
 
 <!--Bootstrap-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We">
