@@ -14,7 +14,11 @@
   <thead class="table-dark">
     <tr>
       <th>
-        <button class="btn btn-outline-light btn-sm" (click)="changeImg()">{{!showImg ? 'Hide' : 'Show'}}</button>
+        <button class="btn btn-outline-light btn-sm"
+        (click)="changeImg()">
+        <i class="{{!showImg ? 'fa far fa-eye-slash' : 'fa far fa-eye'}}"></i>
+          {{!showImg ? 'Hide' : 'Show'}}
+        </button>
       </th>
       <th>#</th>
       <th>Theme</th>
@@ -42,10 +46,16 @@
       <td>{{event.local}}</td>
       <td>{{event.eventDate}}</td>
       <td>{{event.qtdPeoples}}</td>
-      <td>{{event.lots}}</td>
+      <td>{{event.lots[0].name}}</td>
       <td>
-        <button type="button" class="btn btn-primary btn-sm m-1">Edit</button>
-        <button type="button" class="btn btn-danger btn-sm m-1">Delete</button>
+        <button type="button" class="btn btn-primary btn-sm m-1">
+          <i class="fa fa-edit"></i>
+          Edit
+        </button>
+        <button type="button" class="btn btn-danger btn-sm m-1">
+          <i class="fa fa-trash"></i>
+          Delete
+        </button>
       </td>
     </tr>
   </tbody>
