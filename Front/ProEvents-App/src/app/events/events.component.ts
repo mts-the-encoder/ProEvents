@@ -5,6 +5,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-events',
@@ -39,10 +40,12 @@ export class EventsComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private modalService: BsModalService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
 
   public ngOnInit(): void {
+    this.spinner.show();
     this.getEvents();
   }
 
@@ -56,7 +59,11 @@ export class EventsComponent implements OnInit {
         this.events = eventsRes;
         this.filteredEvents = this.events;
       },
-      error: (error: any) => console.log(error)
+      error: (error: any) => {
+        this.spinner.hide();
+        this.toastr.error('Error to load Events', 'Error!')
+      },
+      complete: () => this.spinner.hide()
     });
   }
 
