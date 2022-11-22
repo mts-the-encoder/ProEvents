@@ -16,11 +16,14 @@ import { AppComponent } from './app.component';
 import { SpeakersComponent } from './components/speakers/speakers.component';
 import { EventsComponent } from './components/events/events.component';
 import { NavComponent } from './components/nav/nav.component';
-
 import { EventService } from './services/event.service';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { TitleComponent } from './shared/title/title.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,10 @@ import { TitleComponent } from './shared/title/title.component';
     EventsComponent,
     NavComponent,
     DateTimeFormatPipe,
-    TitleComponent
+    TitleComponent,
+    DashboardComponent,
+    ContactsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

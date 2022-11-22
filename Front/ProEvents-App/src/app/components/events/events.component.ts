@@ -1,3 +1,4 @@
+import { TitleComponent } from './../../shared/title/title.component';
 import { Event } from '../../models/Event';
 import { EventService } from '../../services/event.service';
 
@@ -21,6 +22,7 @@ export class EventsComponent implements OnInit {
   public marginImg = 2;
   public showImg = true;
   private _listFilter = '';
+  private titleEx = "String";
 
   public get listFilter(): string {
     return this._listFilter;
@@ -41,7 +43,7 @@ export class EventsComponent implements OnInit {
     private eventService: EventService,
     private modalService: BsModalService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
   ) { }
 
   public ngOnInit(): void {
