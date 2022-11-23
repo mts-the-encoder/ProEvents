@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpeakersComponent } from './components/speakers/speakers.component';
 import { EventsComponent } from './components/events/events.component';
-import { NavComponent } from './components/nav/nav.component';
+import { NavComponent } from './shared/nav/nav.component';
 import { EventService } from './services/event.service';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
