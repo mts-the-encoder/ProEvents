@@ -34,7 +34,7 @@ namespace ProEvents.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Local")
+                    b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

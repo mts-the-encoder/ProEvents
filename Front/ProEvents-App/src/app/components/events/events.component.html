@@ -1,80 +1,85 @@
+<app-title [title]="'Events'" [iconClass]="'fa far fa-calendar-alt'" [buttonList]="true"></app-title>
 
-<app-title [title]="'Events'" [iconClass]="'fa far fa-calendar-alt'"
-[buttonList]="true"></app-title>
-<div class="row g-3">
-  <div class="col-auto mb-3">
-    <label class="col-form-label mr-2">Filter: </label>
-  </div>
-  <div class="col-auto">
-    <label for="search" class="visually-hidden">Search</label>
-    <input type="text" class="form-control mr-2" placeholder="Search" [(ngModel)]="listFilter">
-  </div>
-</div>
-<h3>Filter: {{listFilter}}</h3>
-<table class="table table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th>
-        <button class="btn btn-outline-light btn-sm"
-        (click)="changeImg()">
-        <i class="{{!showImg ? 'fa far fa-eye-slash' : 'fa far fa-eye'}}"></i>
-          {{!showImg ? 'Hide' : 'Show'}}
-        </button>
-      </th>
-      <th>#</th>
-      <th>Theme</th>
-      <th>Place</th>
-      <th>Date</th>
-      <th>Participants</th>
-      <th>Lot</th>
-      <th>Options</th>
-    </tr>
-  </thead>
-  <tbody *ngIf="events && events.length">
-    <tr *ngFor="let event of filteredEvents">
-      <td>
-        <img [collapse]="showImg"
-        [isAnimated]="true"
-        src="/assets/{{event.imageURL}}"
-        alt="Event photo"
-        [style.width.px]="widthImg"
-        [style.margin.px]="marginImg"
-        [style.border-radius.px]="5"
+
+<div class="card rounded shadow-sm p-3">
+  <div class="d-flex">
+    <div class="flex-fill pe-3">
+      <div class="input-group flex-nowrap">
+        <label for="search" class="input-group-text">Filter: </label>
+        <input
+        type="text"
+        class="form-control"
+        placeholder="Search by Theme and Location"
+        [(ngModel)]="listFilter"
         >
-      </td>
-      <td>{{event.id}}</td>
-      <td>{{event.theme}}</td>
-      <td>{{event.local}}</td>
-      <td>{{event.eventDate | DateFormatPipe}}</td>
-      <td>{{event.qtdPeoples}}</td>
-      <td>{{event.lots[0].name}}</td>
-      <td>
-        <button type="button" class="btn btn-primary btn-sm m-1" tooltipHtml="Edit">
-          <i class="fa fa-edit"></i>
-        </button>
-        <button type="button" class="btn btn-danger btn-sm m-1" tooltip="Delete" (click)="openModal(template)">
-          <i class="fa fa-trash"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-  <tfoot *ngIf="!events.length">
-    <tr>
-      <td colspan="8" class="text-center">
-        <h4>No event found</h4>
-      </td>
-    </tr>
-  </tfoot>
-</table>
+      </div>
+    </div>
+    <div>
+      <a class="d-flex btn btn-outline-primary" href="#">
+        <i class="fa fa-plus-circle my-1"></i>
+        <b class="ms-1 d-none d-sm-block">New</b>
+      </a>
+    </div>
+  </div>
+  <h3>{{listFilter}}</h3>
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>
+          <button class="btn btn-outline-light btn-sm" (click)="changeImg()">
+            <i class="{{!showImg ? 'fa far fa-eye-slash' : 'fa far fa-eye'}}"></i>
+            {{!showImg ? 'Hide' : 'Show'}}
+          </button>
+        </th>
+        <th>#</th>
+        <th>Theme</th>
+        <th>Location</th>
+        <th>Date</th>
+        <th>Participants</th>
+        <th>Lot</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="events && events.length">
+      <tr *ngFor="let event of filteredEvents">
+        <td>
+          <img [collapse]="showImg" [isAnimated]="true" src="/assets/{{event.imageURL}}" alt="Event photo"
+            [style.width.px]="widthImg" [style.margin.px]="marginImg" [style.border-radius.px]="5">
+        </td>
+        <td>{{event.id}}</td>
+        <td>{{event.theme}}</td>
+        <td>{{event.local}}</td>
+        <td>{{event.eventDate | DateFormatPipe}}</td>
+        <td>{{event.qtdPeoples}}</td>
+        <td>{{event.lots[0].name}}</td>
+        <td>
+          <button type="button" class="btn btn-primary btn-sm m-1" tooltipHtml="Edit">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button type="button" class="btn btn-danger btn-sm m-1" tooltip="Delete" (click)="openModal(template)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="!events.length">
+      <tr>
+        <td colspan="8" class="text-center">
+          <h4>No event found</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
 
 <ng-template #template>
   <div class="modal-body text-center">
     <p>Do you want to confirm?</p>
-    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
-    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
   </div>
 </ng-template>
 
 <!--Bootstrap-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+  crossorigin="anonymous" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We">
