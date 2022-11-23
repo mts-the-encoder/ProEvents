@@ -1,2 +1,14 @@
-<h2>{{title}}</h2>
-<hr>
+<div class="d-flex p-3 my-3 text-white bg-secondary rounded shadow-sm">
+  <div class="d-flex align-items-center m-0">
+    <i class="{{iconClass}} ms-auto me-md-3"></i>
+    <div class="lh-1">
+      <h2 class="mb-1 text-white">{{title}}</h2>
+      <small>{{subTitle}}</small>
+    </div>
+  </div>
+  <div class="ms-auto me-md-4 p-3" *ngIf="buttonList">
+    <button class="btn btn-outline-light">
+      List {{title}}
+    </button>
+  </div>
+</div>
