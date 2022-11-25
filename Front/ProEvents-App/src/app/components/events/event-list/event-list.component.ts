@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { TitleComponent } from './../../../shared/title/title.component';
 import { Event } from '../../../models/Event';
 import { EventService } from '../../../services/event.service';
@@ -45,6 +46,7 @@ export class EventListComponent implements OnInit {
     private modalService: BsModalService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {
@@ -81,6 +83,10 @@ export class EventListComponent implements OnInit {
 
   decline(): void {
     this.modalRef?.hide();
+  }
+
+  eventDetail(id: number): void {
+    this.router.navigate([`events/detail/${id}`]);
   }
 }
 

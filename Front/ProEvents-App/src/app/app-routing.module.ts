@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  { path: 'events', redirectTo: 'events/list' },
   {
     path: 'events', component: EventsComponent,
     children: [
