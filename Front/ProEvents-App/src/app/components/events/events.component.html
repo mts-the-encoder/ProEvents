@@ -9,7 +9,7 @@
         <input
         type="text"
         class="form-control"
-        placeholder="Search by Theme and Location"
+        placeholder="Filter by Theme and Location"
         [(ngModel)]="listFilter"
         >
       </div>
@@ -25,7 +25,7 @@
   <table class="table table-striped">
     <thead class="table-dark">
       <tr>
-        <th>
+        <th class="d-none d-md-table-cell">
           <button class="btn btn-outline-light btn-sm" (click)="changeImg()">
             <i class="{{!showImg ? 'fa far fa-eye-slash' : 'fa far fa-eye'}}"></i>
             {{!showImg ? 'Hide' : 'Show'}}
@@ -33,30 +33,27 @@
         </th>
         <th>#</th>
         <th>Theme</th>
-        <th>Location</th>
+        <th class="d-none d-md-table-cell">Location</th>
         <th>Date</th>
-        <th>Participants</th>
-        <th>Lot</th>
+        <th class="d-none d-md-table-cell">Participants</th>
+        <th class="d-none d-md-table-cell">Lot</th>
         <th>Options</th>
       </tr>
     </thead>
     <tbody *ngIf="events && events.length">
       <tr *ngFor="let event of filteredEvents">
-        <td>
+        <td class="d-none d-md-table-cell">
           <img [collapse]="showImg" [isAnimated]="true" src="/assets/{{event.imageURL}}" alt="Event photo"
             [style.width.px]="widthImg" [style.margin.px]="marginImg" [style.border-radius.px]="5">
         </td>
         <td>{{event.id}}</td>
         <td>{{event.theme}}</td>
-        <td>{{event.local}}</td>
+        <td class="d-none d-md-table-cell">{{event.local}}</td>
         <td>{{event.eventDate | DateFormatPipe}}</td>
-        <td>{{event.qtdPeoples}}</td>
-        <td>{{event.lots[0].name}}</td>
+        <td class="d-none d-md-table-cell">{{event.qtdPeoples}}</td>
+        <td class="d-none d-md-table-cell">{{event.lots[0].name}}</td>
         <td>
-          <button type="button" class="btn btn-primary btn-sm m-1" tooltipHtml="Edit">
-            <i class="fa fa-edit"></i>
-          </button>
-          <button type="button" class="btn btn-danger btn-sm m-1" tooltip="Delete" (click)="openModal(template)">
+          <button type="button" class="btn btn-danger btn-lg m-1" tooltip="Delete" (click)="openModal(template)">
             <i class="fa fa-trash"></i>
           </button>
         </td>
