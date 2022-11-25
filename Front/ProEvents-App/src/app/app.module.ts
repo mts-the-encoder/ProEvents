@@ -1,3 +1,4 @@
+import { EventListComponent } from './components/events/event-list/event-list.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +12,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+import { EventDetailComponent } from './components/events/event-detail/event-detail.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpeakersComponent } from './components/speakers/speakers.component';
@@ -34,7 +36,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     TitleComponent,
     DashboardComponent,
     ContactsComponent,
-    ProfileComponent
+    ProfileComponent,
+    EventDetailComponent,
+    EventListComponent
   ],
   imports: [
     BrowserModule,
