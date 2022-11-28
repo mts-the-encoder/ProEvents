@@ -25,6 +25,9 @@ import { TitleComponent } from './shared/title/title.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { RegistrationComponent } from './components/user/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { ProfileComponent } from './components/profile/profile.component';
     ContactsComponent,
     ProfileComponent,
     EventDetailComponent,
-    EventListComponent
+    EventListComponent,
+    UserComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
