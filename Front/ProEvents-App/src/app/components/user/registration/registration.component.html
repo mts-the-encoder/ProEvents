@@ -1,14 +1,66 @@
 <div class="row mt-4">
 
-	<div class="col-md-6 d-none d-md-block" style="height: 450px;">
-		<div class="text-center col-md-12 my-auto side-heder">
-			<h2>Welcome to ProEvents!</h2>
+  <div class="col-md-6 d-none d-md-block" style="height: 450px;">
+    <div class="text-center col-md-12 my-auto side-heder">
+      <h2>Welcome to ProEvents!</h2>
       <h5>Let’s begin the adventure</h5>
-			<img src="../../../../assets/register.svg" class="my-4" alt="" width="400px">
-		</div>
-	</div>
-
-	<div class="col-md-6">
-
-	</div>
+      <img src="../../../../assets/register.svg" class="my-4" alt="" width="400px">
+    </div>
+  </div>
+  <div class="col-md-6">
+    <form class="p-1">
+      <div class="pb-2 d-block d-md-none">
+      </div>
+      <div class="row">
+        <div class="form-text col-sm-6 mt-1">
+          <label class="form-text" >First name</label>
+          <input type="text" class="form-control" placeholder="Enter your first name" />
+        </div>
+        <div class="form-text col-sm-6 mt-1">
+          <label class="form-text" >Last name</label>
+          <input type="text" class="form-control" placeholder="Enter your last name" />
+        </div>
+      </div>
+      <div class="form-text">
+        <label class="form-text" for="">Email:</label>
+        <input class="form-control" type="email" placeholder="Enter your email" />
+      </div>
+      <div class="form-text">
+        <label class="form-text" for="">Username:</label>
+        <input class="form-control" type="text" placeholder="Enter your username" />
+      </div>
+      <div class="row">
+        <div class="form-text col-sm-6 mt-1">
+          <label class="form-text">Password</label>
+          <input type="text" class="form-control" placeholder="Create a password" />
+        </div>
+        <div class="form-text col-sm-6 mt-1">
+          <label class="form-text">Confirm password:</label>
+          <input class="form-control" type="password" placeholder="Confirm your password" />
+        </div>
+      </div>
+      <div class="form-row p-1 mb-2">
+        <div class="custom-control custom-checkbox mt-1 d-flex align-items-center">
+          <input type="checkbox" class="form-check-input me-2" id="customCheck1">
+          <label class="form-check-label form-text ">I agree to the <a href="#">Terms of use</a>.</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-12 d-grid gap-2">
+          <button class="btn btn-lg btn-success btn-block px-lg-5">
+            Create account
+          </button>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-12 me-auto d-flex justify-content-center">
+          <a class="btn btn-link btn-block form-text" routerLink="/user/login">
+            Already have an account?
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
+
+
