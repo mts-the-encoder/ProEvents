@@ -1,1 +1,118 @@
 <app-title [title]="'Profile'"></app-title>
+<form class="form-inline">
+	<div class="row p-3">
+		<div class="col-lg-3 pt-1">
+			<div class="card mb-3">
+				<div class="card-header"></div>
+				<div class="d-flex align-self-center pt-3">
+					<a>
+						<img src="https://external-preview.redd.it/hrcptMQgWHYxpewwMcprJlqYsBkYhGs2Us4Frzw1LO8.jpg?width=640&crop=smart&auto=webp&s=7797ebb22176552ad494e338a0dd69ffb2bb4eb5"
+							name="aboutme" width="120" height="120" class="rounded-circle">
+					</a>
+				</div>
+				<div class="card-body">
+					<div class="h4 text-center mb-3">@UserName</div>
+					<div class="h7 text-bold pb-1 h6 form-text fs-6"><b style="color: #000;">Name: </b> Duffy Duck</div>
+					<div class="h6 form-text fs-6">
+						Developer of web applications: JavaScript, C#, Java, Python, Ruby, Go, TypeScript,
+						etc.
+					</div>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-6 text-center border-right">
+								<div class="h5">1342</div>
+								<div class="h6 text-muted">Events Held</div>
+							</div>
+							<div class="vertical"></div>
+							<div class="col-6 text-center">
+								<div class="h5">1342</div>
+								<div class="h6 text-muted">Participated Events</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="card-footer"></div>
+			</div>
+		</div>
+		<div class="col-lg-9">
+			<div class="row g-3 align-items-center">
+				<div class="form-group col-12">
+					<h3 class="border-bottom">Profile Details</h3>
+				</div>
+				<div class="form-group col">
+					<label>Title</label>
+					<select class="form-select col-auto">
+						<option value=""></option>
+						<option value="0">Rather not say</option>
+						<option value="Mr">Undergraduated</option>
+						<option value="Mr">Bachelor</option>
+						<option value="Mr">Specialist</option>
+						<option value="Mr">Graduated</option>
+						<option value="Mr">Master degree</option>
+						<option value="Mr">Doctorate</option>
+						<option value="Mr">PhD</option>
+					</select>
+				</div>
+				<div class="form-group col-sm-5">
+					<label>Firt Name</label>
+					<input type="text" class="form-control" />
+
+				</div>
+				<div class="form-group col-sm-5">
+					<label>Last Name</label>
+					<input type="text" class="form-control " />
+
+				</div>
+			</div>
+			<div class="row g-3 align-items-center mt-0">
+				<div class="form-group col-sm-5">
+					<label>Email</label>
+					<input type="email" class="form-control" />
+				</div>
+				<div class="form-group col-sm-4">
+					<label>Phone</label>
+					<input type="text" class="form-control" />
+				</div>
+				<div class="form-group col-sm">
+					<label>Function</label>
+					<select class="form-select col-auto">
+						<option value=""></option>
+						<option value="Participant">Participant</option>
+						<option value="Speaker">Speaker</option>
+					</select>
+				</div>
+				<form-group class="col-12">
+					<label>Description</label>
+					<input type="text" class="form-control" />
+				</form-group>
+			</div>
+			<div>
+				<h3 class="pt-3 border-bottom">Change Password</h3>
+				<p class="h6">Create new password:</p>
+			</div>
+			<div class="row align-items-center justify-content-between">
+				<div class="col-6">
+					<label>Password</label>
+					<input type="password" class="form-control" />
+				</div>
+				<div class="col-6">
+					<label>Confirm Password</label>
+					<input type="password" class="form-control" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card-footer mb-5">
+		<div class="row align-items-center justify-content-between">
+			<button class="btn btn-outline-secondary mr-auto border col-2 border border-secondary ms-4">
+				Discard changes
+			</button>
+			<button class="btn btn-success col-2 me-4">
+				<span class="spinner-border spinner-border-sm mr-1"></span>
+				Save and continue
+			</button>
+		</div>
+	</div>
+</form>
