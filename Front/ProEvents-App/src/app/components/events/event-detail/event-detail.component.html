@@ -1,34 +1,38 @@
 <div class="card rounded shadow-sm">
-  <form class="form-inline">
+  <form class="form-inline" [formGroup]="form">
     <div class="p-3">
       <div class="form-row">
         <div class="form-group col-md-12">
           <label>Theme</label>
-          <input type="text" class="form-control" placeholder="Enter the theme">
+          <input type="text" class="form-control" formControlName="theme" placeholder="Enter the theme">
         </div>
       </div>
       <div class="row g-3 align-items-center mt-0">
         <div class="form-group col-md-8">
           <label>Location</label>
-          <input type="text" class="form-control" placeholder="">
+          <input type="text" class="form-control" formControlName="local" placeholder="São Paulo">
         </div>
         <div class="form-group col-md-4">
           <label>Date and Time</label>
-          <input type="datetime" class="form-control" placeholder="">
+          <input type="datetime" class="form-control" formControlName="eventDate" placeholder="11/29/2022">
         </div>
       </div>
       <div class="row g-3 align-items-center mt-0">
         <div class="form-group col-md-2">
           <label>Number of people</label>
-          <input type="text" class="form-control" placeholder="">
+          <input type="text" class="form-control" formControlName="qtdPeoples" placeholder="100">
+        </div>
+        <div class="form-group col-md-2">
+          <label>Phone</label>
+          <input type="text" class="form-control" formControlName="phone" placeholder="(000) 90000-0000">
         </div>
         <div class="form-group col-md-4">
-          <label>Phone</label>
-          <input type="text" class="form-control" placeholder="(000) 90000-0000">
-        </div>
-        <div class="form-group col-md-6">
           <label>Email</label>
-          <input type="text" class="form-control" placeholder="E-mail">
+          <input type="text" class="form-control" formControlName="email" placeholder="AdaLovelace@email.com">
+        </div>
+        <div class="form-group col-md-4">
+          <label>Image</label>
+          <input type="text" class="form-control" formControlName="imageURL" placeholder="Image.png">
         </div>
       </div>
     </div>
