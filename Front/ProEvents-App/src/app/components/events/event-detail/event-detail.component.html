@@ -4,35 +4,42 @@
       <div class="form-row">
         <div class="form-group col-md-12">
           <label>Theme</label>
-          <input type="text" class="form-control" formControlName="theme" placeholder="Enter the theme">
+          <input type="text" class="form-control is-invalid is-invalid" formControlName="theme" placeholder="Enter the theme">
+          <div class="invalid-feedback">Theme is required</div>
         </div>
       </div>
       <div class="row g-3 align-items-center mt-0">
         <div class="form-group col-md-8">
           <label>Location</label>
-          <input type="text" class="form-control" formControlName="local" placeholder="São Paulo">
+          <input type="text" class="form-control is-invalid" formControlName="local" placeholder="São Paulo">
+          <div class="invalid-feedback">Location is required</div>
         </div>
         <div class="form-group col-md-4">
           <label>Date and Time</label>
-          <input type="datetime" class="form-control" formControlName="eventDate" placeholder="11/29/2022">
+          <input type="datetime" class="form-control is-invalid" formControlName="eventDate" placeholder="11/29/2022">
+          <div class="invalid-feedback">DateTime is required</div>
         </div>
       </div>
       <div class="row g-3 align-items-center mt-0">
         <div class="form-group col-md-2">
           <label>Number of people</label>
-          <input type="text" class="form-control" formControlName="qtdPeoples" placeholder="100">
+          <input type="text" class="form-control is-invalid" formControlName="qtdPeoples" placeholder="100">
+          <div class="invalid-feedback">Number of people is required</div>
         </div>
         <div class="form-group col-md-2">
           <label>Phone</label>
-          <input type="text" class="form-control" formControlName="phone" placeholder="(000) 90000-0000">
+          <input type="text" class="form-control is-invalid" formControlName="phone" placeholder="(000) 90000-0000">
+          <div class="invalid-feedback">Phone is required</div>
         </div>
         <div class="form-group col-md-4">
           <label>Email</label>
-          <input type="text" class="form-control" formControlName="email" placeholder="AdaLovelace@email.com">
+          <input type="text" class="form-control is-invalid" formControlName="email" placeholder="AdaLovelace@email.com">
+          <div class="invalid-feedback">E-mail is required</div>
         </div>
         <div class="form-group col-md-4">
           <label>Image</label>
-          <input type="text" class="form-control" formControlName="imageURL" placeholder="Image.png">
+          <input type="text" class="form-control is-invalid" formControlName="imageURL" placeholder="Image.png">
+          <div class="invalid-feedback">Image is required</div>
         </div>
       </div>
     </div>
