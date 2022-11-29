@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
-import { TitleComponent } from './../../../shared/title/title.component';
-import { Event } from '../../../models/Event';
-import { EventService } from '../../../services/event.service';
+import { Event } from '@app/models/Event';
+import { EventService } from '@app/services/event.service';
 
 import { Component, OnInit, TemplateRef } from '@angular/core';
 

@@ -1,4 +1,3 @@
-import { EventListComponent } from './components/events/event-list/event-list.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,22 +11,23 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
-import { EventDetailComponent } from './components/events/event-detail/event-detail.component';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SpeakersComponent } from './components/speakers/speakers.component';
-import { EventsComponent } from './components/events/events.component';
-import { NavComponent } from './shared/nav/nav.component';
-import { EventService } from './services/event.service';
+import { EventListComponent } from '@app/components/events/event-list/event-list.component';
+import { EventDetailComponent } from '@app/components/events/event-detail/event-detail.component';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { AppComponent } from '@app/app.component';
+import { SpeakersComponent } from '@app/components/speakers/speakers.component';
+import { EventsComponent } from '@app/components/events/events.component';
+import { NavComponent } from '@app/shared/nav/nav.component';
+import { EventService } from '@app/services/event.service';
 
-import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
-import { TitleComponent } from './shared/title/title.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ContactsComponent } from './components/contacts/contacts.component';
-import { ProfileComponent } from './components/user/profile/profile.component';
-import { UserComponent } from './components/user/user.component';
-import { LoginComponent } from './components/user/login/login.component';
-import { RegistrationComponent } from './components/user/registration/registration.component';
+import { DateTimeFormatPipe } from '@app/helpers/DateTimeFormat.pipe';
+import { TitleComponent } from '@app/shared/title/title.component';
+import { DashboardComponent } from '@app/components/dashboard/dashboard.component';
+import { ContactsComponent } from '@app/components/contacts/contacts.component';
+import { ProfileComponent } from '@app/components/user/profile/profile.component';
+import { UserComponent } from '@app/components/user/user.component';
+import { LoginComponent } from '@app/components/user/login/login.component';
+import { RegistrationComponent } from '@app/components/user/registration/registration.component';
 
 @NgModule({
   declarations: [
