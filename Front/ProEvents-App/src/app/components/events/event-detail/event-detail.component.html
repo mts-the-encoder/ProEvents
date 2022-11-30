@@ -1,11 +1,14 @@
 <div class="card rounded shadow-sm">
-  <form class="form-inline" [formGroup]="form">
+  <form class="form-inline" [formGroup]="form" #formDir="ngForm">
     <div class="p-3">
       <div class="form-row">
         <div class="form-group col-md-12">
           <label>Theme</label>
-          <input type="text" class="form-control is-invalid is-invalid" formControlName="theme" placeholder="Enter the theme">
-          <div class="invalid-feedback">Theme is required</div>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': form.get('theme')!.errors && form.get('theme')!.touched}"
+          formControlName="theme" placeholder="Enter the theme">
+          <div *ngIf="form.get('theme')!.hasError('required')" class="invalid-feedback">Theme is required</div>
+          <div *ngIf="form.get('theme')!.hasError('minlength')" class="invalid-feedback">Theme must be at least 4 characters</div>
+          <div *ngIf="form.get('theme')!.hasError('maxlength')" class="invalid-feedback">This field’s Theme is longer than the 50 character limit</div>
         </div>
       </div>
       <div class="row g-3 align-items-center mt-0">

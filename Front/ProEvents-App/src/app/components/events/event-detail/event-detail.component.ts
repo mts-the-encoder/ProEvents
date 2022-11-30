@@ -13,12 +13,13 @@ export class EventDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.validation();
   }
 
   public validation(): void {
     this.form = new FormGroup({
       theme: new FormControl('',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(50)]),
+        [Validators.required, Validators.minLength(4), Validators.maxLength(50), Validators.nullValidator]),
       local: new FormControl('', Validators.required),
       eventDate: new FormControl('',
         [Validators.required, Validators.pattern("MM/dd/yyyy")]),
@@ -30,5 +31,4 @@ export class EventDetailComponent implements OnInit {
       imageURL: new FormControl('', Validators.required)
     });
   }
-
 }

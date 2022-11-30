@@ -64,7 +64,8 @@ import { RegistrationComponent } from '@app/components/user/registration/registr
       progressBar: true,
       progressAnimation: 'decreasing'
     }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ReactiveFormsModule
   ],
   providers: [
     EventService
