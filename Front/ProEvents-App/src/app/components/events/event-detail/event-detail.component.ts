@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-event-detail',
@@ -10,9 +10,7 @@ export class EventDetailComponent implements OnInit {
 
   form!: FormGroup;
 
-  get f(): any {
-    return this.form.controls;
-  }
+  get f(): any { return this.form.controls; }
 
   constructor(private fb: FormBuilder) { }
 
@@ -36,6 +34,4 @@ export class EventDetailComponent implements OnInit {
   public resetForm(): void {
     this.form.reset();
   }
-
-  //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
 }
