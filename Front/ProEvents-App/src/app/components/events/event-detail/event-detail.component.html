@@ -4,11 +4,12 @@
       <div class="form-row">
         <div class="form-group col-md-12">
           <label>Theme</label>
-          <input type="text" class="form-control" [ngClass]="{'is-invalid': form.get('theme')!.errors && form.get('theme')!.touched}"
-          formControlName="theme" placeholder="Enter the theme">
-          <div *ngIf="form.get('theme')!.hasError('required')" class="invalid-feedback">Theme is required</div>
-          <div *ngIf="form.get('theme')!.hasError('minlength')" class="invalid-feedback">Theme must be at least 4 characters</div>
-          <div *ngIf="form.get('theme')!.hasError('maxlength')" class="invalid-feedback">This field’s Theme is longer than the 50 character limit</div>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': f.theme!.errors && f.theme!.touched}"
+            formControlName="theme" placeholder="Enter the theme">
+          <div *ngIf="f.theme!.errors?.required" class="invalid-feedback">Theme is required</div>
+          <div *ngIf="f.theme!.errors?.minlength" class="invalid-feedback">Theme must be at least 4 characters</div>
+          <div *ngIf="f.theme!.errors?.maxlength" class="invalid-feedback">This field’s Theme is longer than the 50
+            character limit</div>
         </div>
       </div>
       <div class="row g-3 align-items-center mt-0">
@@ -36,7 +37,8 @@
         </div>
         <div class="form-group col-md-4">
           <label>Email</label>
-          <input type="text" class="form-control is-invalid" formControlName="email" placeholder="AdaLovelace@email.com">
+          <input type="text" class="form-control is-invalid" formControlName="email"
+            placeholder="AdaLovelace@email.com">
           <div class="invalid-feedback">E-mail is required</div>
         </div>
         <div class="form-group col-md-4">
