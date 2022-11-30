@@ -16,15 +16,17 @@
           <input type="text" class="form-control"
             [ngClass]="{'is-invalid': f.firstName!.errors && f.firstName!.touched}" formControlName="firstName"
             placeholder="Enter your first name" />
-          <div *ngIf="f.firstName!.errors?.required && f.firstName!.touched" class="invalid-feedback">Please fill this
-            field</div>
+          <div *ngIf="f.firstName!.errors?.required && f.firstName!.touched" class="invalid-feedback">
+            Please fill this field
+          </div>
         </div>
         <div class="form-text col-sm-6 mt-1">
           <label class="form-text">Last name</label>
           <input type="text" class="form-control" [ngClass]="{'is-invalid': f.lastName!.errors && f.lastName!.touched}"
             formControlName="lastName" placeholder="Enter your last name" />
-          <div *ngIf="f.lastName!.errors?.required && f.lastName!.touched" class="invalid-feedback">Please fill this
-            field</div>
+          <div *ngIf="f.lastName!.errors?.required && f.lastName!.touched" class="invalid-feedback">
+            Please fill this field
+          </div>
         </div>
       </div>
       <div class="form-text">
@@ -58,11 +60,13 @@
                   (click)="toggleFieldTextType()"></i>
               </span>
             </div>
-            <div *ngIf="f.password!.errors?.minlength && f.password!.touched" class="invalid-feedback">Password must be at
-              least 6 characters</div>
-            <div *ngIf="f.password!.errors?.required && f.password!.touched" class="invalid-feedback">Please fill this
-              field</div>
+            <div *ngIf="f.password!.errors?.minlength && f.password!.touched" class="invalid-feedback">
+              Password must be at least 6 characters
             </div>
+            <div *ngIf="f.password!.errors?.required && f.password!.touched" class="invalid-feedback">
+              Please fill this field
+            </div>
+        </div>
         <div class="form-text col-sm-6 mt-1">
           <label class="form-text">Confirm password:</label>
           <input class="form-control d-none" type="password" formControlName="confirmPassword"

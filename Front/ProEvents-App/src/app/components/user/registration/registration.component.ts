@@ -49,5 +49,6 @@ export class RegistrationComponent implements OnInit {
   public toggleFieldTextTypeConfirmation() {
     this.fieldTextTypeConfirmation = !this.fieldTextTypeConfirmation;
   }
+
   //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
 }
