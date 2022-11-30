@@ -1,4 +1,5 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidatorField } from './../../../helpers/ValidatorField';
+import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -19,14 +20,34 @@ export class RegistrationComponent implements OnInit {
   }
 
   private validation(): void {
+
+    const formOptions: AbstractControlOptions = {
+      validators: ValidatorField.MustMatch('password', 'confirmPassword'),
+    };
+
     this.form = this.fb.group({
       firstName: ['', Validators.required] ,
       lastName: ['', Validators.required] ,
       email: ['', [Validators.required, Validators.email]] ,
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]] ,
-      confirmPassword: ['', Validators.required]
-    });
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+    }, formOptions);
   }
 
+  hide = true;
+  get emailInput() { return this.form.get('email'); }
+  get passwordInput() { return this.form.get('password'); }
+
+  fieldTextType!: boolean;
+  fieldTextTypeConfirmation!: boolean;
+
+  public toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
+
+  public toggleFieldTextTypeConfirmation() {
+    this.fieldTextTypeConfirmation = !this.fieldTextTypeConfirmation;
+  }
+  //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
 }

@@ -12,51 +12,86 @@
       </div>
       <div class="row mt-5">
         <div class="form-text col-sm-6 mt-1">
-          <label class="form-text" >First name</label>
-          <input type="text" class="form-control" [ngClass]="{'is-invalid': f.firstName!.errors && f.firstName!.touched}"
-          formControlName="firstName"  placeholder="Enter your first name" />
-          <div *ngIf="f.firstName!.errors?.required && f.firstName!.touched" class="invalid-feedback">Please fill this field</div>
+          <label class="form-text">First name</label>
+          <input type="text" class="form-control"
+            [ngClass]="{'is-invalid': f.firstName!.errors && f.firstName!.touched}" formControlName="firstName"
+            placeholder="Enter your first name" />
+          <div *ngIf="f.firstName!.errors?.required && f.firstName!.touched" class="invalid-feedback">Please fill this
+            field</div>
         </div>
         <div class="form-text col-sm-6 mt-1">
-          <label class="form-text" >Last name</label>
+          <label class="form-text">Last name</label>
           <input type="text" class="form-control" [ngClass]="{'is-invalid': f.lastName!.errors && f.lastName!.touched}"
-          formControlName="lastName" placeholder="Enter your last name" />
-          <div *ngIf="f.lastName!.errors?.required && f.lastName!.touched" class="invalid-feedback">Please fill this field</div>
+            formControlName="lastName" placeholder="Enter your last name" />
+          <div *ngIf="f.lastName!.errors?.required && f.lastName!.touched" class="invalid-feedback">Please fill this
+            field</div>
         </div>
       </div>
       <div class="form-text">
         <label class="form-text" for="">Email:</label>
         <input class="form-control" type="email" formControlName="email"
-        [ngClass]="{'is-invalid': f.email.errors && f.email.touched}"  placeholder="Enter your email" />
+          [ngClass]="{'is-invalid': f.email.errors && f.email.touched}" placeholder="Enter your email" />
         <div *ngIf="f.email!.errors?.required && f.email!.touched" class="invalid-feedback">Please fill this field</div>
         <div *ngIf="f.email!.errors?.email && f.email!.touched" class="invalid-feedback">The Email is not valid.</div>
       </div>
       <div class="form-text">
         <label class="form-text" for="">Username:</label>
         <input class="form-control" type="text" formControlName="username"
-        [ngClass]="{'is-invalid': f.username.errors && f.username.touched}"  placeholder="Enter your username" />
-        <div *ngIf="f.username!.errors?.required && f.username!.touched" class="invalid-feedback">Please fill this field</div>
+          [ngClass]="{'is-invalid': f.username.errors && f.username.touched}" placeholder="Enter your username" />
+        <div *ngIf="f.username!.errors?.required && f.username!.touched" class="invalid-feedback">Please fill this field
+        </div>
       </div>
+
       <div class="row">
         <div class="form-text col-sm-6 mt-1">
           <label class="form-text">Password</label>
-          <input type="text" class="form-control" formControlName="password"
-          [ngClass]="{'is-invalid': f.password.errors && f.password.touched}"  placeholder="Create a password" />
-          <div *ngIf="f.password!.errors?.required && f.password!.touched" class="invalid-feedback">Please fill this field</div>
-          <div *ngIf="f.password!.errors?.minlength && f.password!.touched" class="invalid-feedback">Password must be at least 6 characters</div>
-        </div>
+
+            <input class="form-control d-none" type="password" formControlName="password"
+            [ngClass]="{'is-invalid': f.password.errors && f.password.touched}"
+            placeholder="Confirm your password" />
+            <div class="input-group mb-3">
+              <input [type]="fieldTextType ? 'password' : 'text'" class="form-control " formControlName="password"
+                (click)="toggleFieldTextType()" [ngClass]="{'is-invalid': f.password.errors && f.password.touched}"
+                placeholder="Create a password" />
+              <span class="input-group-text">
+                <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextType, 'fa-eye': fieldTextType}"
+                  (click)="toggleFieldTextType()"></i>
+              </span>
+            </div>
+            <div *ngIf="f.password!.errors?.minlength && f.password!.touched" class="invalid-feedback">Password must be at
+              least 6 characters</div>
+            <div *ngIf="f.password!.errors?.required && f.password!.touched" class="invalid-feedback">Please fill this
+              field</div>
+            </div>
         <div class="form-text col-sm-6 mt-1">
           <label class="form-text">Confirm password:</label>
-          <input class="form-control" type="password" formControlName="confirmPassword"
-          [ngClass]="{'is-invalid': f.confirmPassword.errors && f.confirmPassword.touched}"  placeholder="Confirm your password" />
-          <div *ngIf="f.confirmPassword!.errors?.required && f.confirmPassword!.touched" class="invalid-feedback">Confirm your passoword</div>
-          <!-- <div *ngIf="f.confirmPassword!.errors?.required && f.confirmPassword!.touched" class="invalid-feedback">Confirm your passoword</div> -->
+          <input class="form-control d-none" type="password" formControlName="confirmPassword"
+            [ngClass]="{'is-invalid': f.confirmPassword.errors && f.confirmPassword.touched}"
+            placeholder="Confirm your password" />
+            <div class="input-group mb-3 form-text">
+              <input class="form-control" [type]="fieldTextTypeConfirmation ? 'password' : 'text'" formControlName="confirmPassword"
+              [ngClass]="{'is-invalid': f.confirmPassword.errors && f.confirmPassword.touched}"
+              placeholder="Confirm your password" />
+              <span class="input-group-text" id="basic-addon2">
+                <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextTypeConfirmation, 'fa-eye': fieldTextTypeConfirmation}" (click)="toggleFieldTextTypeConfirmation()"></i>
+              </span>
+            </div>
+          <div *ngIf="f.confirmPassword!.errors?.required && f.confirmPassword!.touched" class="invalid-feedback">
+            Confirm your passoword
+          </div>
+          <div *ngIf="f.confirmPassword!.errors?.minlength && f.confirmPassword!.touched" class="invalid-feedback">
+            Password confirmation must be at least 6 characters
+          </div>
+          <div *ngIf="f.confirmPassword!.errors?.mustMatch" class="invalid-feedback">
+            Your password and confirmation must be match
+          </div>
         </div>
       </div>
       <div class="form-row p-1 mb-2">
         <div class="custom-control custom-checkbox mt-1 d-flex align-items-center">
           <input type="checkbox" class="form-check-input me-2" id="customCheck1">
-          <label class="form-check-label form-text ">By clicking Sign Up, you agree to our Terms <a href="#">Privacy Policy</a>.</label>
+          <label class="form-check-label form-text ">By clicking Sign Up, you agree to our Terms <a href="#">Privacy
+              Policy</a>.</label>
         </div>
       </div>
       <div class="form-row">
@@ -76,5 +111,3 @@
     </form>
   </div>
 </div>
-
-
