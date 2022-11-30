@@ -1,59 +1,70 @@
 <div class="card rounded shadow-sm">
-  <form class="form-inline" [formGroup]="form" #formDir="ngForm">
+  <form class="form-inline" [formGroup]="form">
     <div class="p-3">
+      <!-- <p>Form value: {{form.value | json}}</p>
+      <p>Form valid: {{form.status | json}}</p> -->
       <div class="form-row">
         <div class="form-group col-md-12">
           <label>Theme</label>
           <input type="text" class="form-control" [ngClass]="{'is-invalid': f.theme!.errors && f.theme!.touched}"
-            formControlName="theme" placeholder="Enter the theme">
-          <div *ngIf="f.theme!.errors?.required" class="invalid-feedback">Theme is required</div>
-          <div *ngIf="f.theme!.errors?.minlength" class="invalid-feedback">Theme must be at least 4 characters</div>
-          <div *ngIf="f.theme!.errors?.maxlength" class="invalid-feedback">This field’s Theme is longer than the 50
-            character limit</div>
+          formControlName="theme" placeholder="Enter the theme">
+          <div *ngIf="f.theme!.errors?.required && f.theme!.touched" class="invalid-feedback">Please fill this field</div>
+          <div *ngIf="f.theme!.errors?.minlength && f.theme!.touched" class="invalid-feedback">Theme must be at least 4 characters</div>
+          <div *ngIf="f.theme!.errors?.maxlength && f.theme!.touched" class="invalid-feedback">This field’s Theme is longer than the 50 character limit</div>
         </div>
       </div>
       <div class="row g-3 align-items-center mt-0">
         <div class="form-group col-md-8">
           <label>Location</label>
-          <input type="text" class="form-control is-invalid" formControlName="local" placeholder="São Paulo">
-          <div class="invalid-feedback">Location is required</div>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': f.local!.errors && f.local!.touched}"
+          formControlName="local" placeholder="São Paulo">
+          <div *ngIf="f.local!.errors?.required && f.local!.touched" class="invalid-feedback">Please fill this field</div>
         </div>
         <div class="form-group col-md-4">
           <label>Date and Time</label>
-          <input type="datetime" class="form-control is-invalid" formControlName="eventDate" placeholder="11/29/2022">
-          <div class="invalid-feedback">DateTime is required</div>
+          <input type="date" class="form-control" [ngClass]="{'is-invalid': f.eventDate!.errors && f.eventDate!.touched}"
+          formControlName="eventDate" placeholder="11/29/2022">
+          <div *ngIf="f.eventDate!.errors?.required && f.eventDate!.touched" class="invalid-feedback">Please fill this field</div>
         </div>
       </div>
       <div class="row g-3 align-items-center mt-0">
         <div class="form-group col-md-2">
           <label>Number of people</label>
-          <input type="text" class="form-control is-invalid" formControlName="qtdPeoples" placeholder="100">
-          <div class="invalid-feedback">Number of people is required</div>
+          <input type="number" class="form-control" [ngClass]="{'is-invalid': f.qtdPeople!.errors && f.qtdPeople!.touched}"
+          formControlName="qtdPeople" placeholder="100">
+          <div *ngIf="f.qtdPeople!.errors?.required && f.qtdPeople!.touched" class="invalid-feedback">Please fill this field</div>
+          <div *ngIf="f.qtdPeople!.errors?.max && f.qtdPeople!.touched" class="invalid-feedback">The number must be lower than 120.000</div>
+          <div *ngIf="f.qtdPeople!.errors?.min && f.qtdPeople!.touched" class="invalid-feedback">The number must be less than or equal to 120.000</div>
         </div>
         <div class="form-group col-md-2">
           <label>Phone</label>
-          <input type="text" class="form-control is-invalid" formControlName="phone" placeholder="(000) 90000-0000">
-          <div class="invalid-feedback">Phone is required</div>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': f.phone!.errors && f.phone!.touched}"
+          formControlName="phone" placeholder="(00) 90000-0000">
+          <div *ngIf="f.phone!.errors?.required && f.phone!.touched" class="invalid-feedback">Please fill this field</div>
+          <div *ngIf="f.phone!.errors?.pattern && f.phone!.touched" class="invalid-feedback">Invalid phone number.</div>
         </div>
         <div class="form-group col-md-4">
           <label>Email</label>
-          <input type="text" class="form-control is-invalid" formControlName="email"
-            placeholder="AdaLovelace@email.com">
-          <div class="invalid-feedback">E-mail is required</div>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': f.email!.errors && f.email!.touched}"
+          formControlName="email"
+          placeholder="AdaLovelace@email.com">
+          <div *ngIf="f.email!.errors?.required && f.email!.touched" class="invalid-feedback">Please fill this field</div>
+          <div *ngIf="f.email!.errors?.email && f.email!.touched" class="invalid-feedback">The Email is not valid.</div>
         </div>
         <div class="form-group col-md-4">
           <label>Image</label>
-          <input type="text" class="form-control is-invalid" formControlName="imageURL" placeholder="Image.png">
-          <div class="invalid-feedback">Image is required</div>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': f.imageURL!.errors && f.imageURL!.touched}"
+          formControlName="imageURL" placeholder="Image.png">
+          <div *ngIf="f.imageURL!.errors?.required && f.imageURL!.touched" class="invalid-feedback">Please fill this field</div>
         </div>
       </div>
     </div>
     <div class="card-footer">
       <div class="row align-items-center justify-content-between mt-0">
-        <button class="btn btn-outline-secondary mr-auto border col-2 border border-secondary ms-4">
+        <button class="btn btn-outline-secondary mr-auto border col-2 border border-secondary ms-4" (click)="resetForm()">
           Discard Changes
         </button>
-        <button class="btn btn-success col-2 me-4">
+        <button class="btn btn-success col-2 me-4" [disabled]="!form.valid">
           <!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
           Save
         </button>

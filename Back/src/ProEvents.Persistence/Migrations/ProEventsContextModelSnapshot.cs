@@ -42,7 +42,7 @@ namespace ProEvents.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("QtdPeoples")
+                    b.Property<int>("QtdPeople")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Theme")

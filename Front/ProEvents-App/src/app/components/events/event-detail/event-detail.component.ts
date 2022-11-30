@@ -24,11 +24,18 @@ export class EventDetailComponent implements OnInit {
     this.form = this.fb.group({
       theme: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50), Validators.nullValidator]],
       local: ['', Validators.required],
-      eventDate: ['', [Validators.required, Validators.pattern("MM/dd/yyyy")]],
-      qtdPeoples: ['', [Validators.required, Validators.max(120000)]],
-      phone: ['', Validators.required],
+      eventDate: ['', [Validators.required]],
+      qtdPeople: ['', [Validators.required, Validators.max(120000), Validators.min(100)]],
+      phone: ['', [Validators.required, Validators.pattern('(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})')]],
       email: ['', [Validators.required, Validators.email]],
       imageURL: ['', Validators.required]
+      //validator: MustMatch('password', 'confirmPassword')
     });
   }
+
+  public resetForm(): void {
+    this.form.reset();
+  }
+
+  //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
 }

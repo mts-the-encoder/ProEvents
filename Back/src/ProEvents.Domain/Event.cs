@@ -6,7 +6,7 @@
         public string Local { get; set; }
         public DateTime? EventDate { get; set; }
         public string Theme { get; set; }
-        public int QtdPeoples { get; set; }
+        public int QtdPeople { get; set; }
         public string ImageURL { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
