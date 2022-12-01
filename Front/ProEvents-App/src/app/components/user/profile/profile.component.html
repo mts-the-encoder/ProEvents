@@ -44,7 +44,8 @@
           </div>
           <div class="form-group col">
             <label>Title</label>
-            <select class="form-select col-auto">
+            <select class="form-select col-auto" formControlName="title"
+            [ngClass]="{'is-invalid': f.title.errors && f.title.touched}">
               <option value=""></option>
               <option value="0">Rather not say</option>
               <option value="Mr">Undergraduated</option>
@@ -55,6 +56,9 @@
               <option value="Mr">Doctorate</option>
               <option value="Mr">PhD</option>
             </select>
+            <div *ngIf="f.title!.errors?.required && f.title!.touched" class="invalid-feedback">
+              Please select a title
+            </div>
           </div>
           <div class="form-group col-sm-5">
             <label>Firt Name</label>
@@ -82,19 +86,43 @@
           </div>
           <div class="form-group col-sm-4">
             <label>Phone</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="phone"
+            [ngClass]="{'is-invalid': f.phone.errors && f.phone.touched}" />
+            <div *ngIf="f.phone!.errors?.minlength && f.phone!.touched" class="invalid-feedback">
+              Invalid phone number! Must be at least 9 characters.
+            </div>
+            <div *ngIf="f.phone!.errors?.maxlength && f.phone!.touched" class="invalid-feedback">
+              Invalid phone number! Can be max 11 characters long.
+            </div>
+            <div *ngIf="f.phone!.errors?.required && f.phone!.touched" class="invalid-feedback">
+              Please fill this field
+            </div>
           </div>
           <div class="form-group col-sm">
             <label>Function</label>
-            <select class="form-select col-auto">
+            <select class="form-select col-auto" formControlName="function"
+            [ngClass]="{'is-invalid': f.function.errors && f.function.touched}">
               <option value=""></option>
               <option value="Participant">Participant</option>
               <option value="Speaker">Speaker</option>
             </select>
+            <div *ngIf="f.function!.errors?.required && f.function!.touched" class="invalid-feedback">
+              Please select a function
+            </div>
           </div>
           <form-group class="col-12">
             <label>Description</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="description"
+            [ngClass]="{'is-invalid': f.description.errors && f.description.touched}"/>
+            <div *ngIf="f.description!.errors?.minlength && f.description!.touched" class="invalid-feedback">
+              Description should be between 10 and 150 characters long.
+            </div>
+            <div *ngIf="f.description!.errors?.maxlength && f.description!.touched" class="invalid-feedback">
+              Description should be between 10 and 150 characters long.
+            </div>
+            <div *ngIf="f.description!.errors?.required && f.description!.touched" class="invalid-feedback">
+              Please fill this field
+            </div>
           </form-group>
         </div>
         <div>
@@ -145,10 +173,10 @@
     </div>
     <div class="card-footer mb-5">
       <div class="row align-items-center justify-content-between">
-        <button class="btn btn-outline-secondary mr-auto border col-2 border border-secondary ms-4">
+        <button class="btn btn-outline-secondary mr-auto border col-2 border border-secondary ms-4" (click)="resetForm()">
           Discard changes
         </button>
-        <button class="btn btn-success col-2 me-4">
+        <button class="btn btn-success col-2 me-4" [disabled]="!form.valid">
           <!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
           Save and continue
         </button>

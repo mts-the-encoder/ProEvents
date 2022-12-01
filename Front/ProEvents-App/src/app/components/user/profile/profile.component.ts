@@ -26,19 +26,23 @@ export class ProfileComponent implements OnInit {
     };
 
     this.form = this.fb.group({
-      title: ['', Validators.required],
+      title: ['', [Validators.required, Validators.nullValidator]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
-      function: ['', Validators.required],
+      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(150)]],
+      phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(11)]],
+      function: ['', [Validators.required, Validators.nullValidator]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
     }, formOptions);
   }
 
+  public resetForm(): void {
+    this.form.reset();
+  }
+
   hide = true;
-  get emailInput() { return this.form.get('email'); }
   get passwordInput() { return this.form.get('password'); }
 
   fieldTextType!: boolean;

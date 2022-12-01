@@ -36,7 +36,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   hide = true;
-  get emailInput() { return this.form.get('email'); }
   get passwordInput() { return this.form.get('password'); }
 
   fieldTextType!: boolean;

@@ -47,7 +47,6 @@
       <div class="row">
         <div class="form-text col-sm-6 mt-1">
           <label class="form-text">Password</label>
-
             <input class="form-control d-none" type="password" formControlName="password"
             [ngClass]="{'is-invalid': f.password.errors && f.password.touched}"
             placeholder="Confirm your password" />
@@ -100,7 +99,7 @@
       </div>
       <div class="form-row">
         <div class="form-group col-12 d-grid gap-2">
-          <button class="btn btn-lg btn-success btn-block px-lg-5">
+          <button class="btn btn-lg btn-success btn-block px-lg-5" [disabled]="!form.valid">
             Create account
           </button>
         </div>
