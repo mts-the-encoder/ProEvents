@@ -11,6 +11,7 @@ public class EventsController : ControllerBase
 {
     private readonly IEventService _service;
 
+    private Uri uri = new Uri("https://localhost:7242/");
     public EventsController(IEventService service)
     {
         _service = service;
@@ -23,13 +24,13 @@ public class EventsController : ControllerBase
         {
             var events = await _service.GetAllEventsAsync(true);
 
-            if (events == null) return NotFound("No events found");
+            if (events == null) return NoContent();
 
             return Ok(events);
         }
         catch (Exception e)
         {
-            return this.StatusCode(StatusCodes.Status500InternalServerError,
+            return this.StatusCode(StatusCodes.Status404NotFound,
                 $"Error trying to retrieve events. Error: {e.Message}");
         }
     }
@@ -47,7 +48,7 @@ public class EventsController : ControllerBase
         }
         catch (Exception e)
         {
-            return this.StatusCode(StatusCodes.Status500InternalServerError,
+            return this.StatusCode(StatusCodes.Status404NotFound,
                 $"Error trying to retrieve event. Error: {e.Message}");
         }
     }
@@ -59,13 +60,13 @@ public class EventsController : ControllerBase
         {
             var res = await _service.GetAllEventsByThemeAsync(theme, true);
 
-            if (res == null) return NotFound("No events by theme are found");
+            if (res.Length <= 0) return NoContent();
 
             return Ok(res);
         }
         catch (Exception e)
         {
-            return this.StatusCode(StatusCodes.Status500InternalServerError,
+            return this.StatusCode(StatusCodes.Status404NotFound,
                 $"Error trying to retrieve events. Error: {e.Message}");
         }
     }
@@ -79,11 +80,11 @@ public class EventsController : ControllerBase
 
             if (res == null) return BadRequest("Error to create event");
 
-            return Ok(res);
+            return Created("~api/[controller]", res);
         }
         catch (Exception e)
         {
-            return this.StatusCode(StatusCodes.Status500InternalServerError,
+            return this.StatusCode(StatusCodes.Status400BadRequest,
                 $"Error trying to create events. Error: {e.Message}");
         }
     }
@@ -101,7 +102,7 @@ public class EventsController : ControllerBase
         }
         catch (Exception e)
         {
-            return this.StatusCode(StatusCodes.Status500InternalServerError,
+            return this.StatusCode(StatusCodes.Status404NotFound,
                 $"Error trying to update events. Error: {e.Message}");
         }
     }
@@ -116,7 +117,7 @@ public class EventsController : ControllerBase
         }
         catch (Exception e)
         {
-            return this.StatusCode(StatusCodes.Status500InternalServerError,
+            return this.StatusCode(StatusCodes.Status404NotFound,
                 $"Error trying to delete events. Error: {e.Message}");
         }
     }
