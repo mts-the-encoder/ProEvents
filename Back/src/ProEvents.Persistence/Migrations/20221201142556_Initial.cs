@@ -18,7 +18,7 @@ namespace ProEvents.Persistence.Migrations
                     Local = table.Column<string>(type: "TEXT", nullable: false),
                     EventDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Theme = table.Column<string>(type: "TEXT", nullable: false),
-                    QtdPeoples = table.Column<int>(type: "INTEGER", nullable: false),
+                    QtdPeople = table.Column<int>(type: "INTEGER", nullable: false),
                     ImageURL = table.Column<string>(type: "TEXT", nullable: false),
                     Phone = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false)
@@ -111,12 +111,14 @@ namespace ProEvents.Persistence.Migrations
                         name: "FK_SocialMedias_Events_EventId",
                         column: x => x.EventId,
                         principalTable: "Events",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SocialMedias_Speakers_SpeakerId",
                         column: x => x.SpeakerId,
                         principalTable: "Speakers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

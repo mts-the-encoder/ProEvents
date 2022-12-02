@@ -11,7 +11,7 @@ using ProEvents.Persistence.Context;
 namespace ProEvents.Persistence.Migrations
 {
     [DbContext(typeof(ProEventsContext))]
-    [Migration("20221111122611_Initial")]
+    [Migration("20221201142556_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,11 +197,13 @@ namespace ProEvents.Persistence.Migrations
                 {
                     b.HasOne("ProEvents.Domain.Event", "Event")
                         .WithMany("SocialMedias")
-                        .HasForeignKey("EventId");
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ProEvents.Domain.Speaker", "Speaker")
                         .WithMany("SocialMedias")
-                        .HasForeignKey("SpeakerId");
+                        .HasForeignKey("SpeakerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Event");
 

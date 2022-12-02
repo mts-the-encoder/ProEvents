@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProEvents.Application.Contracts;
+using ProEvents.Application.Dto;
 using ProEvents.Domain;
 
 namespace ProEvents.API.Controllers;
@@ -70,7 +71,7 @@ public class EventsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(Event model)
+    public async Task<IActionResult> Post(EventDto model)
     {
         try
         {
@@ -88,7 +89,7 @@ public class EventsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, Event model)
+    public async Task<IActionResult> Put(int id, EventDto model)
     {
         try
         {

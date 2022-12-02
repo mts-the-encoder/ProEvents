@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "3ziuE3R2C1IJX72DMCzOaFh0N7wOdR2uaQSdkiGIoJpFceJeQD0mMtno5tS0BtFUvDcOtoBRYWokAah8VmAKaw==",
+  "dgSpecHash": "ssKCmWHy4P/Un8OaSb9h7zr5Om16MtDWKJ1dChmtjJsY4/oZAtC9H671nQyAPlnXy8DfVtJDcJ3NeYBQqeSLgQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\mnsantos4\\Desktop\\FullStack\\ProEvents\\Back\\src\\ProEvents.Api\\ProEvents.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mnsantos4\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\mnsantos4\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\mnsantos4\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mnsantos4\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.10\\microsoft.aspnetcore.jsonpatch.6.0.10.nupkg.sha512",
     "C:\\Users\\mnsantos4\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.10\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.10.nupkg.sha512",

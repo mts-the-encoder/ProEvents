@@ -34,7 +34,7 @@ namespace ProEvents.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Location")
+                    b.Property<string>("Local")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -195,11 +195,13 @@ namespace ProEvents.Persistence.Migrations
                 {
                     b.HasOne("ProEvents.Domain.Event", "Event")
                         .WithMany("SocialMedias")
-                        .HasForeignKey("EventId");
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ProEvents.Domain.Speaker", "Speaker")
                         .WithMany("SocialMedias")
-                        .HasForeignKey("SpeakerId");
+                        .HasForeignKey("SpeakerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Event");
 

@@ -173,7 +173,7 @@
     </div>
     <div class="card-footer mb-5">
       <div class="row align-items-center justify-content-between">
-        <button class="btn btn-outline-secondary mr-auto border col-2 border border-secondary ms-4" (click)="resetForm()">
+        <button class="btn btn-outline-secondary mr-auto border col-2 border border-secondary ms-4" (click)="resetForm($event)">
           Discard changes
         </button>
         <button class="btn btn-success col-2 me-4" [disabled]="!form.valid">
