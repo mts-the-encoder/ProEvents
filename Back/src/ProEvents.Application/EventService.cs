@@ -24,20 +24,22 @@ namespace ProEvents.Application
 
         public async Task<EventDto> AddEvents(EventDto model)
         {
-            return null;
-            //try
-            //{
-            //    _generalPersist.Add<EventDto>(model);
+            try
+            {
+                var eventDomain = _mapper.Map<Event>(model);
 
-            //    if (await _generalPersist.SaveChangesAsync())
-            //        return await _eventPersist.GetEventByIdAsync(model.Id, false);
+                _generalPersist.Add<Event>(eventDomain);
 
-            //    return null;
-            //}
-            //catch (Exception e)
-            //{
-            //    throw new Exception(e.Message);
-            //}
+                if (!await _generalPersist.SaveChangesAsync()) return null;
+                
+                var res = await _eventPersist.GetEventByIdAsync(eventDomain.Id, false);
+                return _mapper.Map<EventDto>(res);
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public async Task<EventDto> UpdateEvent(int eventId, EventDto model)
