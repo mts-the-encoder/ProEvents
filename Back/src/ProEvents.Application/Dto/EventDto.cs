@@ -2,6 +2,7 @@
 {
     public class EventDto
     {
+        public int Id { get; set; }
         public string Local { get; set; }
         public DateTime? EventDate { get; set; }
         public string Theme { get; set; }
