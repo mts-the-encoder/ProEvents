@@ -6,6 +6,9 @@ namespace ProEvents.Application.Dto
     {
         public int Id { get; set; }
         public string Local { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? EventDate { get; set; }
 
         [Required]
@@ -15,6 +18,9 @@ namespace ProEvents.Application.Dto
 
         [Range(100,120000, ErrorMessage = "must be at range 100 and 120.000")]
         public int QtdPeople { get; set; }
+
+        [RegularExpression(@".*\.(gif|jpe?g|bmp|png)$", 
+            ErrorMessage = "Please enter a valid image. (gif, jpg, jpeg, bmp ou png)")]
         public string ImageURL { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
@@ -26,6 +32,7 @@ namespace ProEvents.Application.Dto
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",
             ErrorMessage = "Please enter a valid e-mail address")]  //Only 4fun
         public string Email { get; set; }
+        //[DataType(DataType.Password)]
 
         public IEnumerable<LotDto> Lots { get; set; }
         public IEnumerable<SocialMediaDto> SocialMedias { get; set; }

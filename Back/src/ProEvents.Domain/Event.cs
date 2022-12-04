@@ -1,5 +1,8 @@
-﻿namespace ProEvents.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ProEvents.Domain
 {
+    //[Table("")]
     public class Event
     {
         public int Id { get; set; }
