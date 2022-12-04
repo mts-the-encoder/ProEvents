@@ -30,7 +30,7 @@ public class EventsController : ControllerBase
         }
         catch (Exception e)
         {
-            return this.StatusCode(StatusCodes.Status404NotFound,
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Error trying to retrieve events. Error: {e.Message}");
         }
     }
@@ -42,13 +42,13 @@ public class EventsController : ControllerBase
         {
             var res = await _service.GetEventsByIdAsync(id, true);
 
-            if (res == null) return NotFound("No event by Id found");
+            if (res == null) return NotFound("No event was found");
 
             return Ok(res);
         }
         catch (Exception e)
         {
-            return this.StatusCode(StatusCodes.Status404NotFound,
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Error trying to retrieve event. Error: {e.Message}");
         }
     }
@@ -60,13 +60,13 @@ public class EventsController : ControllerBase
         {
             var res = await _service.GetAllEventsByThemeAsync(theme, true);
 
-            if (res.Length <= 0) return NoContent();
+            if (res.Length <= 0) return NotFound("Event not found");
 
             return Ok(res);
         }
         catch (Exception e)
         {
-            return this.StatusCode(StatusCodes.Status404NotFound,
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Error trying to retrieve events. Error: {e.Message}");
         }
     }
@@ -84,7 +84,7 @@ public class EventsController : ControllerBase
         }
         catch (Exception e)
         {
-            return this.StatusCode(StatusCodes.Status400BadRequest,
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Error trying to create events. Error: {e.Message}");
         }
     }
@@ -95,9 +95,7 @@ public class EventsController : ControllerBase
         try
         {
             var res = await _service.UpdateEvent(id, model);
-
-            if (res == null) return BadRequest("Error to update event");
-
+            if (res == null) return NotFound("No events are found");
             return Ok(res);
         }
         catch (Exception e)
@@ -112,8 +110,8 @@ public class EventsController : ControllerBase
     {
         try
         {
-            return await _service.DeleteEvent(id) ? Ok("Deleted") : 
-                BadRequest("Event not found");
+            await _service.DeleteEvent(id);
+            return Ok("Deleted");
         }
         catch (Exception e)
         {
