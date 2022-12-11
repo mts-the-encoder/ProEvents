@@ -1,5 +1,5 @@
 import { ValidatorField } from './../../../helpers/ValidatorField';
-import { FormGroup, FormBuilder, AbstractControlOptions, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, AbstractControlOptions, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -55,5 +55,9 @@ export class ProfileComponent implements OnInit {
 
   public toggleFieldTextTypeConfirmation() {
     this.fieldTextTypeConfirmation = !this.fieldTextTypeConfirmation;
+  }
+
+  public cssValidator(formField: FormControl): any {
+    return {'is-invalid': formField.errors && formField.touched}
   }
 }

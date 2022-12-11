@@ -48,7 +48,7 @@
         <td class="d-none d-md-table-cell">{{event.local}}</td>
         <td>{{event.eventDate | DateFormatPipe}}</td>
         <td class="d-none d-md-table-cell">{{event.qtdPeople | number}}</td>
-        <td class="d-none d-md-table-cell">{{event.lots[0]}}</td>
+        <td class="d-none d-md-table-cell">{{event.lots[0]?.name | uppercase}}</td>
         <td>
           <button type="button" class="btn btn-danger btn-sm m-1" tooltip="Delete" (click)="openModal(template)">
             <i class="fa fa-trash"></i>

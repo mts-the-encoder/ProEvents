@@ -45,7 +45,7 @@
           <div class="form-group col">
             <label>Title</label>
             <select class="form-select col-auto" formControlName="title"
-            [ngClass]="{'is-invalid': f.title.errors && f.title.touched}">
+            [ngClass]="cssValidator(f.title)">
               <option value=""></option>
               <option value="0">Rather not say</option>
               <option value="Mr">Undergraduated</option>
@@ -62,14 +62,14 @@
           </div>
           <div class="form-group col-sm-5">
             <label>Firt Name</label>
-            <input type="text" class="form-control" [ngClass]="{'is-invalid': f.firstName!.errors && f.firstName!.touched}"
+            <input type="text" class="form-control" [ngClass]="cssValidator(f.firstName)"
             formControlName="firstName"/>
             <div *ngIf="f.firstName!.errors?.required && f.firstName!.touched" class="invalid-feedback">Please fill this
               field</div>
           </div>
           <div class="form-group col-sm-5">
             <label>Last Name</label>
-            <input type="text" class="form-control" [ngClass]="{'is-invalid': f.lastName!.errors && f.lastName!.touched}"
+            <input type="text" class="form-control" [ngClass]="cssValidator(f.lastName)"
             formControlName="lastName" />
             <div *ngIf="f.lastName!.errors?.required && f.lastName!.touched" class="invalid-feedback">
               Please fill this field
@@ -80,14 +80,14 @@
           <div class="form-group col-sm-5">
             <label>Email</label>
             <input type="email" class="form-control" formControlName="email"
-            [ngClass]="{'is-invalid': f.email.errors && f.email.touched}" />
+            [ngClass]="cssValidator(f.email)" />
             <div *ngIf="f.email!.errors?.required && f.email!.touched" class="invalid-feedback">Please fill this field</div>
             <div *ngIf="f.email!.errors?.email && f.email!.touched" class="invalid-feedback">The Email is not valid.</div>
           </div>
           <div class="form-group col-sm-4">
             <label>Phone</label>
             <input type="text" class="form-control" formControlName="phone"
-            [ngClass]="{'is-invalid': f.phone.errors && f.phone.touched}" />
+            [ngClass]="cssValidator(f.phone)" />
             <div *ngIf="f.phone!.errors?.minlength && f.phone!.touched" class="invalid-feedback">
               Invalid phone number! Must be at least 9 characters.
             </div>
@@ -101,7 +101,7 @@
           <div class="form-group col-sm">
             <label>Function</label>
             <select class="form-select col-auto" formControlName="function"
-            [ngClass]="{'is-invalid': f.function.errors && f.function.touched}">
+            [ngClass]="cssValidator(f.function)">
               <option value=""></option>
               <option value="Participant">Participant</option>
               <option value="Speaker">Speaker</option>
@@ -113,7 +113,7 @@
           <form-group class="col-12">
             <label>Description</label>
             <input type="text" class="form-control" formControlName="description"
-            [ngClass]="{'is-invalid': f.description.errors && f.description.touched}"/>
+            [ngClass]="cssValidator(f.description)"/>
             <div *ngIf="f.description!.errors?.minlength && f.description!.touched" class="invalid-feedback">
               Description should be between 10 and 150 characters long.
             </div>
@@ -134,7 +134,7 @@
             <label class="mb-2">Password</label>
             <div class="input-group mb-3">
               <input [type]="fieldTextType ? 'password' : 'text'" class="form-control " formControlName="password"
-                (click)="toggleFieldTextType()" [ngClass]="{'is-invalid': f.password.errors && f.password.touched}"
+                (click)="toggleFieldTextType()" [ngClass]="cssValidator(f.password)"
                 placeholder="Create a password" />
               <span class="input-group-text">
                 <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextType, 'fa-eye': fieldTextType}"
@@ -152,13 +152,13 @@
             <label>Confirm Password</label>
             <div class="input-group mb-3 form-text">
               <input class="form-control" [type]="fieldTextTypeConfirmation ? 'password' : 'text'" formControlName="confirmPassword"
-              [ngClass]="{'is-invalid': f.confirmPassword.errors && f.confirmPassword.touched}"
+              [ngClass]="cssValidator(f.confirmPassword)"
               placeholder="Confirm your password" />
               <span class="input-group-text" id="basic-addon2">
                 <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextTypeConfirmation, 'fa-eye': fieldTextTypeConfirmation}" (click)="toggleFieldTextTypeConfirmation()"></i>
               </span>
               <div *ngIf="f.confirmPassword!.errors?.required && f.confirmPassword!.touched" class="invalid-feedback">
-                Confirm your passoword
+                Confirm your password
               </div>
               <div *ngIf="f.confirmPassword!.errors?.minlength && f.confirmPassword!.touched" class="invalid-feedback">
                 Password confirmation must be at least 6 characters
