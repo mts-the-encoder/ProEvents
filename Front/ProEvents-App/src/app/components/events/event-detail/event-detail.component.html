@@ -22,7 +22,10 @@
         </div>
         <div class="form-group col-md-4">
           <label>Date and Time</label>
-          <input  class="form-control" min="date" [ngClass]="cssValidator(f.eventDate)" bsDatepicker
+          <input  class="form-control"
+          [ngClass]="cssValidator(f.eventDate)"
+          value="{{event.eventDate | DateFormatPipe}}"
+          bsDatepicker
           [bsConfig]="bsConfig"
           formControlName="eventDate" placeholder="11/29/2022">
           <div *ngIf="f.eventDate!.errors?.required && f.eventDate!.touched" class="invalid-feedback">Please fill this field</div>

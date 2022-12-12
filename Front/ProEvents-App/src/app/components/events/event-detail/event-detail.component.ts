@@ -1,8 +1,10 @@
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Event } from './../../../models/Event';
 import { EventService } from './../../../services/event.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Event } from '@app/models/Event';
 
 @Component({
   selector: 'app-event-detail',
@@ -18,15 +20,19 @@ export class EventDetailComponent implements OnInit {
   get f(): any { return this.form.controls; }
 
   get bsConfig(): any {
-    return { adaptivePosition: true, isAnimated: true, containerClass: 'theme-default', showTodayButton: true, todayPosition: 'center',
-    dateInputFormat: 'MM/DD/YYYY hh:mm a', showWeekNumbers: false }
+    return {
+      adaptivePosition: true, isAnimated: true, containerClass: 'theme-default', showTodayButton: true, todayPosition: 'center',
+      dateInputFormat: 'MM/DD/YYYY hh:mm a', showWeekNumbers: false
+    }
   }
 
   constructor(
     private fb: FormBuilder,
     private router: ActivatedRoute,
-    private eventService: EventService
-    ) { }
+    private eventService: EventService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.loadEvent();
@@ -36,18 +42,22 @@ export class EventDetailComponent implements OnInit {
   public loadEvent(): void {
     const eventIdParam = this.router.snapshot.paramMap.get('id');
 
-    if (eventIdParam !== null)
+    if (eventIdParam !== null) {
+      this.spinner.show();
+
       this.eventService.getEventById(+eventIdParam).subscribe({
         next: (event: Event) => {
           this.event = {...event};
           this.form.patchValue(this.event);
         },
         error: (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('cannot load event', 'Error!')
           console.log(error);
         },
-        complete: () => {},
+        complete: () => this.spinner.hide(),
       });
-
+    }
   }
 
   public validation(): void {
@@ -68,6 +78,6 @@ export class EventDetailComponent implements OnInit {
   }
 
   public cssValidator(formField: FormControl): any {
-    return {'is-invalid': formField.errors && formField.touched}
+    return { 'is-invalid': formField.errors && formField.touched }
   }
 }
