@@ -68,7 +68,7 @@
         <button class="btn btn-outline-secondary mr-auto border col-2 border border-secondary ms-4" (click)="resetForm()">
           Discard Changes
         </button>
-        <button class="btn btn-success col-2 me-4" [disabled]="!form.valid">
+        <button class="btn btn-success col-2 me-4" [disabled]="!form.valid" (click)="saveChanges()">
           <!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
           Save
         </button>

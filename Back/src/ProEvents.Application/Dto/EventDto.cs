@@ -34,8 +34,8 @@ namespace ProEvents.Application.Dto
         public string Email { get; set; }
         //[DataType(DataType.Password)]
 
-        public IEnumerable<LotDto> Lots { get; set; }
-        public IEnumerable<SocialMediaDto> SocialMedias { get; set; }
-        public IEnumerable<SpeakerDto> EventsSpeakers { get; set; }
+        public IEnumerable<LotDto>? Lots { get; set; }
+        public IEnumerable<SocialMediaDto>? SocialMedias { get; set; }
+        public IEnumerable<SpeakerDto>? EventsSpeakers { get; set; }
     }
 }

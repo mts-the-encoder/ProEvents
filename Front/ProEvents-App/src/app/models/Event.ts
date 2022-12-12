@@ -11,7 +11,7 @@ export interface Event {
   imageURL: string;
   phone: string;
   email: string;
-  lots: Lot[];
-  socialMedias: SocialMedia[];
-  eventsSpeakers: Speaker[];
+  lots?: Lot[];
+  socialMedias?: SocialMedia[];
+  eventsSpeakers?: Speaker[];
 }

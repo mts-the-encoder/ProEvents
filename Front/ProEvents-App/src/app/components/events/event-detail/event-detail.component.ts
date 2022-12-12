@@ -14,8 +14,8 @@ import { ActivatedRoute } from '@angular/router';
 export class EventDetailComponent implements OnInit {
 
   event = {} as Event;
-
   form!: FormGroup;
+  saveMode = 'post';
 
   get f(): any { return this.form.controls; }
 
@@ -45,9 +45,11 @@ export class EventDetailComponent implements OnInit {
     if (eventIdParam !== null) {
       this.spinner.show();
 
+      this.saveMode = 'put';
+
       this.eventService.getEventById(+eventIdParam).subscribe({
         next: (event: Event) => {
-          this.event = {...event};
+          this.event = { ...event };
           this.form.patchValue(this.event);
         },
         error: (error: any) => {
@@ -66,7 +68,7 @@ export class EventDetailComponent implements OnInit {
       local: ['', Validators.required],
       eventDate: ['', [Validators.required]],
       qtdPeople: ['', [Validators.required, Validators.max(120000), Validators.min(100)]],
-      phone: ['', [Validators.required, Validators.pattern('(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})')]],
+      phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       imageURL: ['', Validators.required]
       //validator: MustMatch('password', 'confirmPassword')
@@ -79,5 +81,36 @@ export class EventDetailComponent implements OnInit {
 
   public cssValidator(formField: FormControl): any {
     return { 'is-invalid': formField.errors && formField.touched }
+  }
+
+  public saveChanges(): void {
+    this.spinner.show();
+    if (this.form.valid) {
+      if (this.saveMode === 'post') {
+        this.event = { ...this.form.value };
+        this.eventService.postEvent(this.event).subscribe({
+          next: () => this.toastr.success('event has been saved successfully', 'Success'),
+          error: (error: any) => {
+            console.error(error);
+            console.log(error);
+
+            this.spinner.hide();
+            this.toastr.error('error to save event', 'Error');
+          },
+          complete: () => this.spinner.hide(),
+        });
+      } else {
+        this.event = {id: this.event.id, ...this.form.value};
+          this.eventService.putEvent(this.event.id, this.event).subscribe({
+          next: () => this.toastr.success('event has been saved successfully', 'Success'),
+          error: (error: any) => {
+            console.error(error);
+            this.spinner.hide();
+            this.toastr.error('error to save event', 'Error');
+          },
+          complete: () => this.spinner.hide(),
+        });
+      }
+    }
   }
 }
