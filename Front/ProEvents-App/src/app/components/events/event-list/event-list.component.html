@@ -50,7 +50,7 @@
         <td class="d-none d-md-table-cell">{{event.qtdPeople | number}}</td>
         <td class="d-none d-md-table-cell">{{event.lots[0]?.name | uppercase}}</td>
         <td>
-          <button type="button" class="btn btn-danger btn-sm m-1" tooltip="Delete" (click)="openModal(template)">
+          <button type="button" class="btn btn-danger btn-sm m-1" tooltip="Delete" (click)="openModal($event, template, event.id)">
             <i class="fa fa-trash"></i>
           </button>
         </td>
@@ -68,7 +68,7 @@
 
 <ng-template #template>
   <div class="modal-body text-center">
-    <p>Do you want to confirm?</p>
+    <p>Do you want to confirm? Event id: {{this.eventId}}</p>
     <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
     <button type="button" class="btn btn-primary" (click)="decline()">No</button>
   </div>

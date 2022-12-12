@@ -18,6 +18,7 @@ export class EventListComponent implements OnInit {
   public modalRef!: BsModalRef;
   public events: Event[] = [];
   public filteredEvents: Event[] = [];
+  public eventId = 0;
 
   public widthImg = 50;
   public marginImg = 2;
@@ -71,7 +72,9 @@ export class EventListComponent implements OnInit {
     });
   }
 
-  openModal(template: TemplateRef<any>): void {
+  openModal(event: any, template: TemplateRef<any>, eventId: number): void {
+    event.stopPropagation();
+    this.eventId = eventId;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
