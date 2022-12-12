@@ -24,7 +24,6 @@ export class EventListComponent implements OnInit {
   public marginImg = 2;
   public showImg = true;
   private _listFilter = '';
-  private titleEx = "String";
 
   public get listFilter(): string {
     return this._listFilter;
@@ -51,14 +50,14 @@ export class EventListComponent implements OnInit {
 
   public ngOnInit(): void {
     this.spinner.show();
-    this.getEvents();
+    this.loadEvents();
   }
 
   public changeImg(): void {
     this.showImg = !this.showImg;
   }
 
-  public getEvents(): void {
+  public loadEvents(): void {
     this.eventService.getEvent().subscribe({
       next: (eventsRes: Event[]) => {
         this.events = eventsRes;
@@ -80,7 +79,21 @@ export class EventListComponent implements OnInit {
 
   confirm(): void {
     this.modalRef?.hide();
-    this.toastr.success('The event was successfully deleted', 'Deleted!');
+    this.spinner.show();
+    this.eventService.deleteEvent(this.eventId).subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.toastr.success('The event was successfully deleted', 'Deleted!');
+        this.spinner.hide();
+        this.loadEvents();
+      },
+      error: (error: any) => {
+        this.toastr.error(`failed to delete event ${this.eventId}`, 'Error!');
+        this.spinner.hide();
+        console.error(error);
+      },
+      complete: () => this.spinner.hide()
+    });
   }
 
   decline(): void {

@@ -111,7 +111,7 @@ public class EventsController : ControllerBase
         try
         {
             await _service.DeleteEvent(id);
-            return Ok("Deleted");
+            return Ok(new { message = "Deleted" });
         }
         catch (Exception e)
         {
