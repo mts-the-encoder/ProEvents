@@ -1,5 +1,8 @@
+import { EventService } from './../../../services/event.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Event } from '@app/models/Event';
 
 @Component({
   selector: 'app-event-detail',
@@ -7,6 +10,8 @@ import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms'
   styleUrls: ['./event-detail.component.scss']
 })
 export class EventDetailComponent implements OnInit {
+
+  event = {} as Event;
 
   form!: FormGroup;
 
@@ -17,10 +22,32 @@ export class EventDetailComponent implements OnInit {
     dateInputFormat: 'MM/DD/YYYY hh:mm a', showWeekNumbers: false }
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: ActivatedRoute,
+    private eventService: EventService
+    ) { }
 
   ngOnInit(): void {
+    this.loadEvent();
     this.validation();
+  }
+
+  public loadEvent(): void {
+    const eventIdParam = this.router.snapshot.paramMap.get('id');
+
+    if (eventIdParam !== null)
+      this.eventService.getEventById(+eventIdParam).subscribe({
+        next: (event: Event) => {
+          this.event = {...event};
+          this.form.patchValue(this.event);
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+        complete: () => {},
+      });
+
   }
 
   public validation(): void {
