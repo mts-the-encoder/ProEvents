@@ -11,7 +11,7 @@ public class EventsController : ControllerBase
 {
     private readonly IEventService _service;
 
-    private Uri uri = new Uri("https://localhost:7242/");
+    private Uri _uri = new("https://localhost:7242/");
     public EventsController(IEventService service)
     {
         _service = service;

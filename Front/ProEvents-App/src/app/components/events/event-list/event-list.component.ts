@@ -65,7 +65,7 @@ export class EventListComponent implements OnInit {
       },
       error: (error: any) => {
         this.spinner.hide();
-        this.toastr.error('Error to load Events', 'Error!')
+        this.toastr.error('error to load Events', 'Error!')
       },
       complete: () => this.spinner.hide()
     });
@@ -80,20 +80,17 @@ export class EventListComponent implements OnInit {
   confirm(): void {
     this.modalRef?.hide();
     this.spinner.show();
-    this.eventService.deleteEvent(this.eventId).subscribe({
+    this.eventService.delete(this.eventId).subscribe({
       next: (result: any) => {
         console.log(result);
-        this.toastr.success('The event was successfully deleted', 'Deleted!');
-        this.spinner.hide();
+        this.toastr.success('the event was successfully deleted', 'Deleted!');
         this.loadEvents();
       },
       error: (error: any) => {
         this.toastr.error(`failed to delete event ${this.eventId}`, 'Error!');
-        this.spinner.hide();
         console.error(error);
       },
-      complete: () => this.spinner.hide()
-    });
+    }).add(() => this.spinner.hide());
   }
 
   decline(): void {

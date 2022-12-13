@@ -88,12 +88,10 @@ export class EventDetailComponent implements OnInit {
     if (this.form.valid) {
       if (this.saveMode === 'post') {
         this.event = { ...this.form.value };
-        this.eventService.postEvent(this.event).subscribe({
+        this.eventService.post(this.event).subscribe({
           next: () => this.toastr.success('event has been saved successfully', 'Success'),
           error: (error: any) => {
             console.error(error);
-            console.log(error);
-
             this.spinner.hide();
             this.toastr.error('error to save event', 'Error');
           },
@@ -101,7 +99,7 @@ export class EventDetailComponent implements OnInit {
         });
       } else {
         this.event = {id: this.event.id, ...this.form.value};
-          this.eventService.putEvent(this.event.id, this.event).subscribe({
+          this.eventService.put(this.event).subscribe({
           next: () => this.toastr.success('event has been saved successfully', 'Success'),
           error: (error: any) => {
             console.error(error);
