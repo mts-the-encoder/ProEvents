@@ -15,7 +15,7 @@ namespace ProEvents.API
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration
+        private IConfiguration Configuration
         {
             get;
         }
@@ -31,8 +31,11 @@ namespace ProEvents.API
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<ILotService, LotService>();
+           
             services.AddScoped<IGeneralPersist, GeneralPersist>();
             services.AddScoped<IEventPersist, EventPersist>();
+            services.AddScoped<ILotPersist,LotPersist>();
             services.AddCors();
             services.AddSwaggerGen(c =>
             {

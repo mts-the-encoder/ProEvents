@@ -5,55 +5,34 @@ using ProEvents.Persistence.contracts;
 
 namespace ProEvents.Persistence
 {
-    public class EventPersist : IEventPersist
+    public class LotPersist : ILotPersist
     {
         private readonly ProEventsContext _context;
 
-        public EventPersist(ProEventsContext context)
+        public LotPersist(ProEventsContext context)
         {
             _context = context;
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
-        public async Task<Event[]> GetAllEventsByThemeAsync(string theme, bool includeSpeakers = false)
+
+        public async Task<Lot?[]> GetLotsByEventId(int eventId)
         {
-            IQueryable<Event> query = _context.Events
-                .Include(x => x.Lots)
-                .Include(x => x.SocialMedias);
+            IQueryable<Lot?> query = _context.Lots;
 
-            if (includeSpeakers)
-                query = query.Include(x => x.EventsSpeakers).ThenInclude(x => x.Speaker);
-
-            query = query.AsNoTracking().OrderBy(x => x.Id)
-                .Where(x => x.Theme.ToLower().Contains(theme.ToLower()));
+            query = query.AsNoTracking()
+                .Where(x => x.EventId == eventId);
 
             return await query.ToArrayAsync();
         }
 
-        public async Task<Event[]> GetAllEventsAsync(bool includeSpeakers = false)
+        public async Task<Lot?> GetLotByIdAsync(int eventId, int id)
         {
-            IQueryable<Event> query = _context.Events
-                .Include(x => x.Lots)
-                .Include(x => x.SocialMedias);
+            IQueryable<Lot?> query = _context.Lots;
 
-            if (includeSpeakers)
-                query = query.Include(x => x.EventsSpeakers).ThenInclude(x => x.Speaker);
-
-            query = query.AsNoTracking().OrderBy(x => x.Id);
-
-            return await query.ToArrayAsync();
-        }
-
-        public async Task<Event> GetEventByIdAsync(int eventId,bool includeSpeakers = false)
-        {
-            IQueryable<Event> query = _context.Events
-                .Include(x => x.Lots)
-                .Include(x => x.SocialMedias);
-
-            if (includeSpeakers)
-                query = query.Include(x => x.EventsSpeakers).ThenInclude(x => x.Speaker);
-
-            query = query.AsNoTracking().OrderBy(x => x.Id).Where(x => x.Id == eventId);
+            query = query
+                    .Where(x => x.EventId == eventId
+                        && x.Id == id);
 
             return await query.FirstOrDefaultAsync();
         }

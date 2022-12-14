@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProEvents.Application.Contracts;
 using ProEvents.Application.Dto;
-using ProEvents.Domain;
 
 namespace ProEvents.API.Controllers;
 
@@ -10,8 +9,6 @@ namespace ProEvents.API.Controllers;
 public class LotsController : ControllerBase
 {
     private readonly ILotService _service;
-
-    private Uri _uri = new("https://localhost:7242/");
 
     public LotsController(ILotService service)
     {
@@ -23,16 +20,17 @@ public class LotsController : ControllerBase
     {
         try
         {
-            var events = await _service.GetEventByIdAsync(true);
+            var lots = await _service.GetLotsByEventIdAsync(eventId);
 
-            if (events == null) return NoContent();
+            if (lots is { Length: 0 }) return NoContent();
 
-            return Ok(events);
+
+            return Ok(lots);
         }
         catch (Exception e)
         {
             return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Error trying to retrieve events. Error: {e.Message}");
+                $"Error trying to retrieve lots. Error: {e.Message}");
         }
     }
 
@@ -41,14 +39,13 @@ public class LotsController : ControllerBase
     {
         try
         {
-            var res = await _service.UpdateEvent(eventId, models);
-            if (res == null) return NotFound("No events are found");
-            return Ok(res);
+            var lot = await _service.SaveLot(eventId, models);
+            return Ok(lot);
         }
         catch (Exception e)
         {
             return this.StatusCode(StatusCodes.Status404NotFound,
-                $"Error trying to update events. Error: {e.Message}");
+                $"Error trying to update lots. Error: {e.Message}");
         }
     }
 
@@ -57,14 +54,15 @@ public class LotsController : ControllerBase
     {
         try
         {
-            var lot = await _service.GetEventByIdAsync(eventId, lotId);
-            await _service.DeleteEvent(eventId, lotId);
-            return Ok(new { message = "Deleted" });
+            var lot = await _service.GetLotByIdAsync(eventId, lotId);
+
+            if (lot != null) await _service.Delete(lot.EventId, lot.Id);
+            return Ok(new { message = "Lot Deleted" });
         }
         catch (Exception e)
         {
             return this.StatusCode(StatusCodes.Status404NotFound,
-                $"Error trying to delete events. Error: {e.Message}");
+                $"Error trying to delete lots. Error: {e.Message}");
         }
     }
 }
