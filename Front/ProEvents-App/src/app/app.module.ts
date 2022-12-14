@@ -20,6 +20,7 @@ import { SpeakersComponent } from '@app/components/speakers/speakers.component';
 import { EventsComponent } from '@app/components/events/events.component';
 import { NavComponent } from '@app/shared/nav/nav.component';
 import { EventService } from '@app/services/event.service';
+import { LotService } from './services/lot.service';
 
 import { DateTimeFormatPipe } from '@app/helpers/DateTimeFormat.pipe';
 import { TitleComponent } from '@app/shared/title/title.component';
@@ -70,7 +71,8 @@ import { RegistrationComponent } from '@app/components/user/registration/registr
     ReactiveFormsModule
   ],
   providers: [
-    EventService
+    EventService,
+    LotService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
