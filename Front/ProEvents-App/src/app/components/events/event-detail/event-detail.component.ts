@@ -3,8 +3,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Event } from './../../../models/Event';
 import { EventService } from './../../../services/event.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Lot } from '@app/models/Lot';
 
 @Component({
   selector: 'app-event-detail',
@@ -18,6 +19,8 @@ export class EventDetailComponent implements OnInit {
   saveMode = 'post';
 
   get f(): any { return this.form.controls; }
+
+  get lots(): FormArray { return this.form.get('lots') as FormArray }
 
   get bsConfig(): any {
     return {
@@ -70,9 +73,23 @@ export class EventDetailComponent implements OnInit {
       qtdPeople: ['', [Validators.required, Validators.max(120000), Validators.min(100)]],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      imageURL: ['', Validators.required]
-      //validator: MustMatch('password', 'confirmPassword')
+      imageURL: ['', Validators.required],
+      lotes: this.fb.array([])
     });
+  }
+
+  createLot(lot: Lot): FormGroup{
+    return this.fb.group({
+      id: [lot.id],
+        name: [lot.name, Validators.required],
+        price: [lot.price, Validators.required],
+        startDate: [lot.startDate],
+        endDate: [lot.endDate]
+    });
+  }
+
+  addLot(): void {
+    this.lots.push(this.createLot({id: 0} as Lot));
   }
 
   public resetForm(): void {
