@@ -4,7 +4,7 @@ import { Event } from './../../../models/Event';
 import { EventService } from './../../../services/event.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl, FormArray, AbstractControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Lot } from '@app/models/Lot';
 
 @Component({
@@ -26,7 +26,6 @@ export class EventDetailComponent implements OnInit {
 
   get f(): any { return this.form.controls; }
 
-
   get bsConfig(): any {
     return {
       adaptivePosition: true, isAnimated: true, containerClass: 'theme-default', showTodayButton: true, todayPosition: 'center',
@@ -36,10 +35,11 @@ export class EventDetailComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: ActivatedRoute,
+    private activatedRouter: ActivatedRoute,
     private eventService: EventService,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class EventDetailComponent implements OnInit {
   }
 
   public loadEvent(): void {
-    const eventIdParam = this.router.snapshot.paramMap.get('id');
+    const eventIdParam = this.activatedRouter.snapshot.paramMap.get('id');
 
     if (eventIdParam !== null) {
       this.spinner.show();
@@ -84,7 +84,7 @@ export class EventDetailComponent implements OnInit {
   }
 
   addLot(): void {
-    this.lots.push(this.createLot({id: 0} as Lot));
+    this.lots.push(this.createLot({ id: 0 } as Lot));
   }
 
   createLot(lot: Lot): FormGroup {
@@ -113,7 +113,10 @@ export class EventDetailComponent implements OnInit {
       if (this.saveMode === 'post') {
         this.event = { ...this.form.value };
         this.eventService.post(this.event).subscribe({
-          next: () => this.toastr.success('event has been saved successfully', 'Success'),
+          next: (eventReturn: Event) => {
+            this.toastr.success('event has been saved successfully', 'Success');
+            this.router.navigate([`events/detail/${eventReturn.id}`]);
+          },
           error: (error: any) => {
             console.error(error);
             this.spinner.hide();
@@ -122,9 +125,12 @@ export class EventDetailComponent implements OnInit {
           complete: () => this.spinner.hide(),
         });
       } else {
-        this.event = {id: this.event.id, ...this.form.value};
-          this.eventService.put(this.event).subscribe({
-          next: () => this.toastr.success('event has been saved successfully', 'Success'),
+        this.event = { id: this.event.id, ...this.form.value };
+        this.eventService.put(this.event).subscribe({
+          next: (eventReturn: Event) => {
+            this.toastr.success('event has been saved successfully', 'Success');
+            this.router.navigate([`events/detail/${eventReturn.id}`]);
+          },
           error: (error: any) => {
             console.error(error);
             this.spinner.hide();
