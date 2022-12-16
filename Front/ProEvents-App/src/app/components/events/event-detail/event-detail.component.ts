@@ -3,7 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Event } from './../../../models/Event';
 import { EventService } from './../../../services/event.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl, FormArray, AbstractControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Lot } from '@app/models/Lot';
 
@@ -18,9 +18,14 @@ export class EventDetailComponent implements OnInit {
   form!: FormGroup;
   saveMode = 'post';
 
-  get f(): any { return this.form.controls; }
+  get editMode(): boolean {
+    return this.saveMode === 'put';
+  }
 
   get lots(): FormArray { return this.form.get('lots') as FormArray }
+
+  get f(): any { return this.form.controls; }
+
 
   get bsConfig(): any {
     return {
@@ -74,17 +79,7 @@ export class EventDetailComponent implements OnInit {
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       imageURL: ['', Validators.required],
-      lotes: this.fb.array([])
-    });
-  }
-
-  createLot(lot: Lot): FormGroup{
-    return this.fb.group({
-      id: [lot.id],
-        name: [lot.name, Validators.required],
-        price: [lot.price, Validators.required],
-        startDate: [lot.startDate],
-        endDate: [lot.endDate]
+      lots: this.fb.array([])
     });
   }
 
@@ -92,12 +87,24 @@ export class EventDetailComponent implements OnInit {
     this.lots.push(this.createLot({id: 0} as Lot));
   }
 
+  createLot(lot: Lot): FormGroup {
+    return this.fb.group({
+      id: [lot.id],
+      name: [lot.name, Validators.required],
+      qtd: [lot.qtd, Validators.required],
+      price: [lot.price, Validators.required],
+      startDate: [lot.startDate],
+      endDate: [lot.endDate]
+    });
+  }
+
+
   public resetForm(): void {
     this.form.reset();
   }
 
-  public cssValidator(formField: FormControl): any {
-    return { 'is-invalid': formField.errors && formField.touched }
+  public cssValidator(formField: FormControl | AbstractControl | null): any {
+    return { 'is-invalid': formField?.errors && formField?.touched }
   }
 
   public saveChanges(): void {

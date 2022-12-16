@@ -8,4 +8,5 @@ export interface Lot {
   endDate?: Date;
   qtd: number;
   eventId: number;
+  event: Event;
 }

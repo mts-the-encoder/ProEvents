@@ -84,7 +84,8 @@
   </form>
 </div>
 <!---->
-<div class="card rounded shadow-sm mt-4">
+
+<div class="card rounded shadow-sm mt-4" *ngIf="editMode">
   <div class="p-3">
     <div class="d-flex border-bottom justify-content-between">
       <h2 class="mr-auto">
@@ -96,9 +97,9 @@
     </div>
     <p>Click in Lot to add and fill new Lots</p>
     <div class="form-row p-1">
-      <div class="col">
-        <div>
-          <fieldset class="form-group">
+      <div [formGroup]="form" class="col">
+        <div formArrayName="lots" *ngFor="let lot of lots.controls; let i= index">
+          <fieldset [formGroupName]="i" class="form-group">
             <legend class="d-flex justify-content-between capitalize">
               <button class="p-2 btn btn-sm btn btn-outline-danger mb-2 d-flex" tooltip="Delete Lot"
                 [adaptivePosition]="false" [delay]="500" placement="left">
@@ -109,30 +110,40 @@
             <div class="row">
               <div class="form-group col-md-4 mb-2">
                 <label>Name</label>
-                <input type="text" class="form-control" formControlName="name" placeholder="Lot">
+                <input
+                [ngClass]="cssValidator(lots.get(i+'.name'))"
+                type="text" class="form-control" formControlName="name" placeholder="Lot">
               </div>
               <div class="form-group col-md-4 mb-2">
                 <label>Quantity</label>
-                <input type="text" class="form-control" formControlName="quantity" placeholder="000">
+                <input
+                [ngClass]="cssValidator(lots.get(i+'.qtd'))"
+                type="text" class="form-control" formControlName="qtd" placeholder="000">
               </div>
               <div class="form-group col-md-4 mb-2">
                 <label>Price</label>
-                <input type="text" currencyMask class="form-control" formControlName="price" placeholder="$ 0,00">
+                <input
+                [ngClass]="cssValidator(lots.get(i+'.price'))"
+                type="text" currencyMask class="form-control" formControlName="price" placeholder="$ 0,00">
               </div>
               <div class="form-group col-md-4 mb-2">
                 <label>Start Date</label>
-                <input type="text" class="form-control" formControlName="startDate" placeholder="01/01/2023">
+                <input
+
+                type="text" class="form-control" formControlName="startDate" placeholder="01/01/2023">
               </div>
               <div class="form-group col-md-4 mb-2">
                 <label>End Date</label>
-                <input type="text" class="form-control" formControlName="endDate" placeholder="01/01/2023">
+                <input
+
+                type="text" class="form-control" formControlName="endDate" placeholder="01/01/2023">
               </div>
             </div>
           </fieldset>
         </div>
       </div>
     </div>
-    <button class="d-flex btn btn-outline-info mt-1 align-items-center">
+    <button (click)="addLot()" class="d-flex btn btn-outline-info mt-1 align-items-center">
       <i class="fa fa-plus-circle my-1 m-1 fa-sm"></i>
       <b class="mb-lg-0">Lote</b>
     </button>
@@ -148,7 +159,7 @@
     </div>
   </div>
 </div>
-
+<br>
 
 
 
