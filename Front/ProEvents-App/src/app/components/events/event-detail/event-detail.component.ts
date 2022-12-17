@@ -70,13 +70,12 @@ export class EventDetailComponent implements OnInit {
 
     if (this.eventId !== null || this.eventId === 0) {
       this.spinner.show();
-
       this.saveMode = 'put';
-
       this.eventService.getEventById(this.eventId).subscribe({
         next: (event: Event) => {
           this.event = { ...event };
           this.form.patchValue(this.event);
+          this.loadLots();
         },
         error: (error: any) => {
           this.spinner.hide();
@@ -172,7 +171,6 @@ export class EventDetailComponent implements OnInit {
 
   public saveLots(): void {
     this.spinner.show();
-
     if (this.form.controls['lots'].valid) {
       this.lotService
         .saveLot(this.eventId, this.form.value.lots)
@@ -188,5 +186,20 @@ export class EventDetailComponent implements OnInit {
         })
         .add(() => this.spinner.hide());
     }
+  }
+
+  public loadLots(): void {
+    this.lotService.getLotsByEventId(this.eventId).subscribe({
+      next: (lotsReturn: Lot[]) => {
+        lotsReturn.forEach(lot => {
+          this.lots.push(this.createLot(lot));
+        });
+      },
+      error: (error: any) => {
+        this.toastr.error('error to load lots', 'Error');
+        console.error(error);
+      },
+    })
+    .add(() => this.spinner.hide());
   }
 }
