@@ -3,17 +3,25 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Event } from './../../../models/Event';
 import { EventService } from './../../../services/event.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl, FormArray, AbstractControl } from '@angular/forms';
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormControl,
+  FormArray,
+  AbstractControl,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Lot } from '@app/models/Lot';
+import { LotService } from '@app/services/lot.service';
 
 @Component({
   selector: 'app-event-detail',
   templateUrl: './event-detail.component.html',
-  styleUrls: ['./event-detail.component.scss']
+  styleUrls: ['./event-detail.component.scss'],
 })
 export class EventDetailComponent implements OnInit {
-
+  eventId!: number;
   event = {} as Event;
   form!: FormGroup;
   saveMode = 'post';
@@ -22,21 +30,31 @@ export class EventDetailComponent implements OnInit {
     return this.saveMode === 'put';
   }
 
-  get lots(): FormArray { return this.form.get('lots') as FormArray }
+  get lots(): FormArray {
+    return this.form.get('lots') as FormArray;
+  }
 
-  get f(): any { return this.form.controls; }
+  get f(): any {
+    return this.form.controls;
+  }
 
   get bsConfig(): any {
     return {
-      adaptivePosition: true, isAnimated: true, containerClass: 'theme-default', showTodayButton: true, todayPosition: 'center',
-      dateInputFormat: 'MM/DD/YYYY hh:mm a', showWeekNumbers: false
-    }
+      adaptivePosition: true,
+      isAnimated: true,
+      containerClass: 'theme-default',
+      showTodayButton: true,
+      todayPosition: 'center',
+      dateInputFormat: 'MM/DD/YYYY hh:mm a',
+      showWeekNumbers: false,
+    };
   }
 
   constructor(
     private fb: FormBuilder,
     private activatedRouter: ActivatedRoute,
     private eventService: EventService,
+    private lotService: LotService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     private router: Router
@@ -48,21 +66,21 @@ export class EventDetailComponent implements OnInit {
   }
 
   public loadEvent(): void {
-    const eventIdParam = this.activatedRouter.snapshot.paramMap.get('id');
+    this.eventId = Number(this.activatedRouter.snapshot.paramMap.get('id'));
 
-    if (eventIdParam !== null) {
+    if (this.eventId !== null || this.eventId === 0) {
       this.spinner.show();
 
       this.saveMode = 'put';
 
-      this.eventService.getEventById(+eventIdParam).subscribe({
+      this.eventService.getEventById(this.eventId).subscribe({
         next: (event: Event) => {
           this.event = { ...event };
           this.form.patchValue(this.event);
         },
         error: (error: any) => {
           this.spinner.hide();
-          this.toastr.error('cannot load event', 'Error!')
+          this.toastr.error('cannot load event', 'Error!');
           console.log(error);
         },
         complete: () => this.spinner.hide(),
@@ -72,14 +90,25 @@ export class EventDetailComponent implements OnInit {
 
   public validation(): void {
     this.form = this.fb.group({
-      theme: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50), Validators.nullValidator]],
+      theme: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(50),
+          Validators.nullValidator,
+        ],
+      ],
       local: ['', Validators.required],
       eventDate: ['', [Validators.required]],
-      qtdPeople: ['', [Validators.required, Validators.max(120000), Validators.min(100)]],
+      qtdPeople: [
+        '',
+        [Validators.required, Validators.max(120000), Validators.min(100)],
+      ],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       imageURL: ['', Validators.required],
-      lots: this.fb.array([])
+      lots: this.fb.array([]),
     });
   }
 
@@ -94,20 +123,19 @@ export class EventDetailComponent implements OnInit {
       qtd: [lot.qtd, Validators.required],
       price: [lot.price, Validators.required],
       startDate: [lot.startDate],
-      endDate: [lot.endDate]
+      endDate: [lot.endDate],
     });
   }
-
 
   public resetForm(): void {
     this.form.reset();
   }
 
   public cssValidator(formField: FormControl | AbstractControl | null): any {
-    return { 'is-invalid': formField?.errors && formField?.touched }
+    return { 'is-invalid': formField?.errors && formField?.touched };
   }
 
-  public saveChanges(): void {
+  public saveEvent(): void {
     this.spinner.show();
     if (this.form.valid) {
       if (this.saveMode === 'post') {
@@ -139,6 +167,26 @@ export class EventDetailComponent implements OnInit {
           complete: () => this.spinner.hide(),
         });
       }
+    }
+  }
+
+  public saveLots(): void {
+    this.spinner.show();
+
+    if (this.form.controls['lots'].valid) {
+      this.lotService
+        .saveLot(this.eventId, this.form.value.lots)
+        .subscribe({
+          next: () => {
+            this.toastr.success('Lots successfully saved', 'Success');
+            this.lots.reset();
+          },
+          error: (error: any) => {
+            this.toastr.error('error to save lots', 'Error');
+            console.error(error);
+          },
+        })
+        .add(() => this.spinner.hide());
     }
   }
 }

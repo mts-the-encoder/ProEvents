@@ -7,65 +7,81 @@
         <div class="form-group col-md-12">
           <label>Theme</label>
           <input type="text" class="form-control" [ngClass]="cssValidator(f.theme)" formControlName="theme"
-            placeholder="Enter the theme">
-          <div *ngIf="f.theme!.errors?.required && f.theme!.touched" class="invalid-feedback">Please fill this field
+            placeholder="Enter the theme" />
+          <div *ngIf="f.theme!.errors?.required && f.theme!.touched" class="invalid-feedback">
+            Please fill this field
           </div>
-          <div *ngIf="f.theme!.errors?.minlength && f.theme!.touched" class="invalid-feedback">Theme must be at least 4
-            characters</div>
-          <div *ngIf="f.theme!.errors?.maxlength && f.theme!.touched" class="invalid-feedback">This field’s Theme is
-            longer than the 50 character limit</div>
+          <div *ngIf="f.theme!.errors?.minlength && f.theme!.touched" class="invalid-feedback">
+            Theme must be at least 4 characters
+          </div>
+          <div *ngIf="f.theme!.errors?.maxlength && f.theme!.touched" class="invalid-feedback">
+            This field’s Theme is longer than the 50 character limit
+          </div>
         </div>
       </div>
       <div class="row g-3 align-items-center mt-0">
         <div class="form-group col-md-8">
           <label>Location</label>
           <input type="text" class="form-control" [ngClass]="cssValidator(f.local)" formControlName="local"
-            placeholder="São Paulo">
-          <div *ngIf="f.local!.errors?.required && f.local!.touched" class="invalid-feedback">Please fill this field
+            placeholder="São Paulo" />
+          <div *ngIf="f.local!.errors?.required && f.local!.touched" class="invalid-feedback">
+            Please fill this field
           </div>
         </div>
         <div class="form-group col-md-4">
           <label>Date and Time</label>
-          <input class="form-control" [ngClass]="cssValidator(f.eventDate)" value="{{event.eventDate | DateFormatPipe}}"
-            bsDatepicker [bsConfig]="bsConfig" formControlName="eventDate" placeholder="11/29/2022">
-          <div *ngIf="f.eventDate!.errors?.required && f.eventDate!.touched" class="invalid-feedback">Please fill this
-            field</div>
+          <input class="form-control" [ngClass]="cssValidator(f.eventDate)"
+            value="{{ event.eventDate | DateFormatPipe }}" bsDatepicker [bsConfig]="bsConfig"
+            formControlName="eventDate" placeholder="11/29/2022" />
+          <div *ngIf="f.eventDate!.errors?.required && f.eventDate!.touched" class="invalid-feedback">
+            Please fill this field
+          </div>
         </div>
       </div>
       <div class="row g-3 align-items-center mt-0">
         <div class="form-group col-md-2">
           <label>Number of people</label>
           <input type="number" class="form-control" [ngClass]="cssValidator(f.qtdPeople)" formControlName="qtdPeople"
-            placeholder="100">
-          <div *ngIf="f.qtdPeople!.errors?.required && f.qtdPeople!.touched" class="invalid-feedback">Please fill this
-            field</div>
-          <div *ngIf="f.qtdPeople!.errors?.max && f.qtdPeople!.touched" class="invalid-feedback">The number must be
-            lower than 120.000</div>
-          <div *ngIf="f.qtdPeople!.errors?.min && f.qtdPeople!.touched" class="invalid-feedback">The number must be less
-            than or equal to 120.000</div>
+            placeholder="100" />
+          <div *ngIf="f.qtdPeople!.errors?.required && f.qtdPeople!.touched" class="invalid-feedback">
+            Please fill this field
+          </div>
+          <div *ngIf="f.qtdPeople!.errors?.max && f.qtdPeople!.touched" class="invalid-feedback">
+            The number must be lower than 120.000
+          </div>
+          <div *ngIf="f.qtdPeople!.errors?.min && f.qtdPeople!.touched" class="invalid-feedback">
+            The number must be less than or equal to 120.000
+          </div>
         </div>
         <div class="form-group col-md-2">
           <label>Phone</label>
           <input type="text" class="form-control" [ngClass]="cssValidator(f.phone)" formControlName="phone"
-            placeholder="(00) 90000-0000">
-          <div *ngIf="f.phone!.errors?.required && f.phone!.touched" class="invalid-feedback">Please fill this field
+            placeholder="(00) 90000-0000" />
+          <div *ngIf="f.phone!.errors?.required && f.phone!.touched" class="invalid-feedback">
+            Please fill this field
           </div>
-          <div *ngIf="f.phone!.errors?.pattern && f.phone!.touched" class="invalid-feedback">Invalid phone number.</div>
+          <div *ngIf="f.phone!.errors?.pattern && f.phone!.touched" class="invalid-feedback">
+            Invalid phone number.
+          </div>
         </div>
         <div class="form-group col-md-4">
           <label>Email</label>
           <input type="text" class="form-control" [ngClass]="cssValidator(f.email)" formControlName="email"
-            placeholder="AdaLovelace@email.com">
-          <div *ngIf="f.email!.errors?.required && f.email!.touched" class="invalid-feedback">Please fill this field
+            placeholder="AdaLovelace@email.com" />
+          <div *ngIf="f.email!.errors?.required && f.email!.touched" class="invalid-feedback">
+            Please fill this field
           </div>
-          <div *ngIf="f.email!.errors?.email && f.email!.touched" class="invalid-feedback">The Email is not valid.</div>
+          <div *ngIf="f.email!.errors?.email && f.email!.touched" class="invalid-feedback">
+            The Email is not valid.
+          </div>
         </div>
         <div class="form-group col-md-4">
           <label>Image</label>
           <input type="text" class="form-control" [ngClass]="cssValidator(f.imageURL)" formControlName="imageURL"
-            placeholder="Image.png">
-          <div *ngIf="f.imageURL!.errors?.required && f.imageURL!.touched" class="invalid-feedback">Please fill this
-            field</div>
+            placeholder="Image.png" />
+          <div *ngIf="f.imageURL!.errors?.required && f.imageURL!.touched" class="invalid-feedback">
+            Please fill this field
+          </div>
         </div>
       </div>
     </div>
@@ -75,7 +91,7 @@
           (click)="resetForm()">
           Discard Changes
         </button>
-        <button class="btn btn-success col-2 me-4" [disabled]="!form.valid" (click)="saveChanges()">
+        <button class="btn btn-success col-2 me-4" [disabled]="!form.valid" (click)="saveEvent()">
           <!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
           Save
         </button>
@@ -88,9 +104,7 @@
 <div class="card rounded shadow-sm mt-4" *ngIf="editMode">
   <div class="p-3">
     <div class="d-flex border-bottom justify-content-between">
-      <h2 class="mr-auto">
-        Lots of the Event
-      </h2>
+      <h2 class="mr-auto">Lots of the Event</h2>
       <h2>
         <i class="fas fa-money-bill-wave"></i>
       </h2>
@@ -98,7 +112,7 @@
     <p>Click in Lot to add and fill new Lots</p>
     <div class="form-row p-1">
       <div [formGroup]="form" class="col">
-        <div formArrayName="lots" *ngFor="let lot of lots.controls; let i= index">
+        <div formArrayName="lots" *ngFor="let lot of lots.controls; let i = index">
           <fieldset [formGroupName]="i" class="form-group">
             <legend class="d-flex justify-content-between capitalize">
               <button class="p-2 btn btn-sm btn btn-outline-danger mb-2 d-flex" tooltip="Delete Lot"
@@ -110,33 +124,26 @@
             <div class="row">
               <div class="form-group col-md-4 mb-2">
                 <label>Name</label>
-                <input
-                [ngClass]="cssValidator(lots.get(i+'.name'))"
-                type="text" class="form-control" formControlName="name" placeholder="Lot">
+                <input [ngClass]="cssValidator(lots.get(i + '.name'))" type="text" class="form-control"
+                  formControlName="name" placeholder="Lot" />
               </div>
               <div class="form-group col-md-4 mb-2">
                 <label>Quantity</label>
-                <input
-                [ngClass]="cssValidator(lots.get(i+'.qtd'))"
-                type="text" class="form-control" formControlName="qtd" placeholder="000">
+                <input [ngClass]="cssValidator(lots.get(i + '.qtd'))" type="text" class="form-control"
+                  formControlName="qtd" placeholder="000" />
               </div>
               <div class="form-group col-md-4 mb-2">
                 <label>Price</label>
-                <input
-                [ngClass]="cssValidator(lots.get(i+'.price'))"
-                type="text" currencyMask class="form-control" formControlName="price" placeholder="$ 0,00">
+                <input [ngClass]="cssValidator(lots.get(i + '.price'))" type="text" currencyMask class="form-control"
+                  formControlName="price" placeholder="$ 0,00" />
               </div>
               <div class="form-group col-md-4 mb-2">
                 <label>Start Date</label>
-                <input
-
-                type="text" class="form-control" formControlName="startDate" placeholder="01/01/2023">
+                <input type="text" class="form-control" formControlName="startDate" placeholder="01/01/2023" />
               </div>
               <div class="form-group col-md-4 mb-2">
                 <label>End Date</label>
-                <input
-
-                type="text" class="form-control" formControlName="endDate" placeholder="01/01/2023">
+                <input type="text" class="form-control" formControlName="endDate" placeholder="01/01/2023" />
               </div>
             </div>
           </fieldset>
@@ -153,14 +160,8 @@
       <button class="btn btn-outline-secondary mr-auto border">
         Discard Changes
       </button>
-      <button class="btn btn-success">
-        Save Lots
-      </button>
+      <button (click)="saveLots()" class="btn btn-success">Save Lots</button>
     </div>
   </div>
 </div>
-<br>
-
-
-
-
+<br/>
