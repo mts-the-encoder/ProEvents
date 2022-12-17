@@ -140,11 +140,13 @@
               </div>
               <div class="form-group col-md-4 mb-2">
                 <label>Start Date</label>
-                <input type="text" class="form-control" formControlName="startDate" placeholder="01/01/2023" />
+                <input bsDatepicker [bsConfig]="bsConfigLot"
+                type="text" class="form-control" formControlName="startDate" placeholder="01/01/2023" />
               </div>
               <div class="form-group col-md-4 mb-2">
                 <label>End Date</label>
-                <input type="text" class="form-control" formControlName="endDate" placeholder="01/01/2023" />
+                <input bsDatepicker [bsConfig]="bsConfigLot"
+                type="text" class="form-control" formControlName="endDate" placeholder="01/01/2023" />
               </div>
             </div>
           </fieldset>

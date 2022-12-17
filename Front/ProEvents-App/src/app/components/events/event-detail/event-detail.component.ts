@@ -54,6 +54,18 @@ export class EventDetailComponent implements OnInit {
     };
   }
 
+  get bsConfigLot(): any {
+    return {
+      adaptivePosition: true,
+      isAnimated: true,
+      containerClass: 'theme-default',
+      showTodayButton: true,
+      todayPosition: 'center',
+      dateInputFormat: 'MM/DD/YYYY',
+      showWeekNumbers: false,
+    };
+  }
+
   constructor(
     private fb: FormBuilder,
     private activatedRouter: ActivatedRoute,
