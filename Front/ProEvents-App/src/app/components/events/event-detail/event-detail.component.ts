@@ -1,8 +1,9 @@
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Event } from './../../../models/Event';
 import { EventService } from './../../../services/event.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import {
   FormGroup,
   Validators,
@@ -21,10 +22,13 @@ import { LotService } from '@app/services/lot.service';
   styleUrls: ['./event-detail.component.scss'],
 })
 export class EventDetailComponent implements OnInit {
+
+  modalRef!: BsModalRef;
   eventId!: number;
   event = {} as Event;
   form!: FormGroup;
   saveMode = 'post';
+  currentLot = {id: 0, name: '', index: 0};
 
   get editMode(): boolean {
     return this.saveMode === 'put';
@@ -54,6 +58,7 @@ export class EventDetailComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRouter: ActivatedRoute,
     private eventService: EventService,
+    private modalService: BsModalService,
     private lotService: LotService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
@@ -202,4 +207,32 @@ export class EventDetailComponent implements OnInit {
     })
     .add(() => this.spinner.hide());
   }
+
+  public removeLot(template: TemplateRef<any>, index: number): void {
+    this.currentLot.id = this.lots.get(index + '.id')!.value;
+    this.currentLot.name = this.lots.get(index + '.name')!.value;
+    this.currentLot.index = index;
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  public confirmDeleteLot(): void {
+    this.modalRef.hide();
+    this.spinner.show();
+    this.lotService.delete(this.eventId, this.currentLot.id)
+      .subscribe({
+        next: () => {
+          this.toastr.success('lot deleted successfully', 'Success');
+          this.lots.removeAt(this.currentLot.index);
+        },
+        error: (error: any) => {
+          this.toastr.error(`error to delete lot ${this.currentLot.id}`, 'Error');
+          console.error(error);
+        },
+      }).add(() => this.spinner.hide());
+  }
+
+  public declineDeleteLot(): void {
+    this.modalRef.hide();
+  }
 }
+

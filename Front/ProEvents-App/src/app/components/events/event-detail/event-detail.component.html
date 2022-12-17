@@ -115,7 +115,8 @@
         <div formArrayName="lots" *ngFor="let lot of lots.controls; let i = index">
           <fieldset [formGroupName]="i" class="form-group">
             <legend class="d-flex justify-content-between capitalize">
-              <button class="p-2 btn btn-sm btn btn-outline-danger mb-2 d-flex" tooltip="Delete Lot"
+              <button (click)="removeLot(template, i);"
+                class="p-2 btn btn-sm btn btn-outline-danger mb-2 d-flex" tooltip="Delete Lot"
                 [adaptivePosition]="false" [delay]="500" placement="left">
                 <i class="fa fa-window-close my-1 m-1"></i>
                 <b class="m-lg-0 d-none d-sm-block">Delete</b>
@@ -165,3 +166,11 @@
   </div>
 </div>
 <br/>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm? Lot: {{this.currentLot.name}}</p>
+    <button type="button" class="btn btn-default" (click)="confirmDeleteLot()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="declineDeleteLot()">No</button>
+  </div>
+</ng-template>
