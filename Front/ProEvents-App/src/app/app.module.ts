@@ -11,6 +11,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 import { EventListComponent } from '@app/components/events/event-list/event-list.component';
 import { EventDetailComponent } from '@app/components/events/event-detail/event-detail.component';
@@ -68,7 +69,8 @@ import { RegistrationComponent } from '@app/components/user/registration/registr
       progressAnimation: 'decreasing'
     }),
     NgxSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxCurrencyModule
   ],
   providers: [
     EventService,

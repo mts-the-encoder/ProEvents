@@ -28,7 +28,7 @@ export class EventDetailComponent implements OnInit {
   event = {} as Event;
   form!: FormGroup;
   saveMode = 'post';
-  currentLot = {id: 0, name: '', index: 0};
+  currentLot = { id: 0, name: '', index: 0 };
 
   get editMode(): boolean {
     return this.saveMode === 'put';
@@ -85,7 +85,7 @@ export class EventDetailComponent implements OnInit {
   public loadEvent(): void {
     this.eventId = Number(this.activatedRouter.snapshot.paramMap.get('id'));
 
-    if (this.eventId !== null || this.eventId === 0) {
+    if (this.eventId !== null && this.eventId !== 0) {
       this.spinner.show();
       this.saveMode = 'put';
       this.eventService.getEventById(this.eventId).subscribe({
@@ -143,6 +143,14 @@ export class EventDetailComponent implements OnInit {
     });
   }
 
+  public changeValueData(value: Date, i: number, field: string): void {
+    this.lots.value[i][field] = value;
+  }
+
+  public returnTitle(name: string): string {
+    return name === null || name === '' ? 'Lot Name' : name;
+  }
+
   public resetForm(): void {
     this.form.reset();
   }
@@ -187,8 +195,8 @@ export class EventDetailComponent implements OnInit {
   }
 
   public saveLots(): void {
-    this.spinner.show();
     if (this.form.controls['lots'].valid) {
+      this.spinner.show();
       this.lotService
         .saveLot(this.eventId, this.form.value.lots)
         .subscribe({
@@ -217,7 +225,7 @@ export class EventDetailComponent implements OnInit {
         console.error(error);
       },
     })
-    .add(() => this.spinner.hide());
+      .add(() => this.spinner.hide());
   }
 
   public removeLot(template: TemplateRef<any>, index: number): void {
