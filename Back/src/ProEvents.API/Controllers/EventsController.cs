@@ -139,7 +139,11 @@ public class EventsController : ControllerBase
     {
         try
         {
-            await _service.DeleteEvent(id);
+            var res = await _service.GetEventByIdAsync(id, true);
+
+            if (!await _service.DeleteEvent(id)) throw new Exception("Error to delete event");
+            
+            DeleteImage(res.ImageURL);
             return Ok(new { message = "Deleted" });
         }
         catch (Exception e)
@@ -152,7 +156,7 @@ public class EventsController : ControllerBase
     [NonAction]
     private void DeleteImage(string imageName)
     {
-        var imagePath = Path.Combine(_environment.ContentRootPath, @"Resources/Images", imageName);
+        var imagePath = Path.Combine(_environment.ContentRootPath, @"Resources/images", imageName);
 
         if (System.IO.File.Exists(imagePath))
             System.IO.File.Delete(imageName);
@@ -161,10 +165,11 @@ public class EventsController : ControllerBase
     [NonAction]
     private async Task<string> SaveImage(IFormFile imageFile)
     {
-        var imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName)
+        var imageName = new string(Path.GetFileNameWithoutExtension(imageFile.FileName)
             .Take(10)
             .ToArray()
         ).Replace(' ', '-');
+
 
         imageName = $"{imageName}{DateTime.UtcNow:yymmssfff}{Path.GetExtension(imageFile.FileName)}";
 

@@ -9,7 +9,7 @@
             <div class="form-group col-md-12">
               <label>Theme</label>
               <input type="text" class="form-control" [ngClass]="cssValidator(f.theme)" formControlName="theme"
-                placeholder="Enter the theme" />
+                placeholder="Enter the theme" [(ngModel)]="event.theme"/>
               <div *ngIf="f.theme!.errors?.required && f.theme!.touched" class="invalid-feedback">
                 Please fill this field
               </div>
@@ -25,7 +25,7 @@
             <div class="form-group col-md-8">
               <label>Location</label>
               <input type="text" class="form-control" [ngClass]="cssValidator(f.local)" formControlName="local"
-                placeholder="São Paulo" />
+                placeholder="São Paulo" [(ngModel)]="event.local"/>
               <div *ngIf="f.local!.errors?.required && f.local!.touched" class="invalid-feedback">
                 Please fill this field
               </div>
@@ -34,7 +34,7 @@
               <label>Date and Time</label>
               <input class="form-control" [ngClass]="cssValidator(f.eventDate)"
                 value="{{ event.eventDate | DateFormatPipe }}" bsDatepicker [bsConfig]="bsConfig"
-                formControlName="eventDate" placeholder="11/29/2022" />
+                formControlName="eventDate" placeholder="11/29/2022" [(ngModel)]="event.eventDate"/>
               <div *ngIf="f.eventDate!.errors?.required && f.eventDate!.touched" class="invalid-feedback">
                 Please fill this field
               </div>
@@ -44,7 +44,7 @@
             <div class="form-group col-md-2">
               <label>Number of people</label>
               <input type="number" class="form-control" [ngClass]="cssValidator(f.qtdPeople)"
-                formControlName="qtdPeople" placeholder="100" />
+                formControlName="qtdPeople" placeholder="100" [(ngModel)]="event.qtdPeople"/>
               <div *ngIf="f.qtdPeople!.errors?.required && f.qtdPeople!.touched" class="invalid-feedback">
                 Please fill this field
               </div>
@@ -58,7 +58,7 @@
             <div class="form-group col-md-4">
               <label>Phone</label>
               <input type="text" class="form-control" [ngClass]="cssValidator(f.phone)" formControlName="phone"
-                placeholder="(00) 90000-0000" />
+                placeholder="(00) 90000-0000" [(ngModel)]="event.phone"/>
               <div *ngIf="f.phone!.errors?.required && f.phone!.touched" class="invalid-feedback">
                 Please fill this field
               </div>
@@ -69,7 +69,7 @@
             <div class="form-group col-md-6">
               <label>Email</label>
               <input type="text" class="form-control" [ngClass]="cssValidator(f.email)" formControlName="email"
-                placeholder="AdaLovelace@email.com" />
+                placeholder="AdaLovelace@email.com" [(ngModel)]="event.email"/>
               <div *ngIf="f.email!.errors?.required && f.email!.touched" class="invalid-feedback">
                 Please fill this field
               </div>
