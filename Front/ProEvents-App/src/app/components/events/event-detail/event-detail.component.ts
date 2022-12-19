@@ -264,6 +264,21 @@ export class EventDetailComponent implements OnInit {
 
     this.file = ev.target.files;
     reader.readAsDataURL(this.file[0]);
+    this.uploadImage();
+  }
+
+  public uploadImage(): void {
+    this.spinner.show();
+    this.eventService.postUpload(this.eventId, this.file).subscribe({
+      next: () => {
+        this.loadEvent();
+        this.toastr.success('Image uccessfully updated', 'Success');
+      },
+      error: (error: any) => {
+        this.toastr.error('error to upload image', 'Error');
+        console.error(error);
+      },
+    }).add(() => this.spinner.hide());
   }
 }
 
