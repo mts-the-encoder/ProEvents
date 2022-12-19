@@ -29,6 +29,7 @@ export class EventDetailComponent implements OnInit {
   form!: FormGroup;
   saveMode = 'post';
   currentLot = { id: 0, name: '', index: 0 };
+  imageURL = 'assets/img/upload.png';
 
   get editMode(): boolean {
     return this.saveMode === 'put';
