@@ -118,7 +118,7 @@ namespace ProEvents.Application
             }
         }
 
-        public async Task<EventDto> GetEventsByIdAsync(int eventId, bool includeSpeakers = false)
+        public async Task<EventDto> GetEventByIdAsync(int eventId, bool includeSpeakers = false)
         {
             try
             {

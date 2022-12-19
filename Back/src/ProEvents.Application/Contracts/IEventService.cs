@@ -10,6 +10,6 @@ namespace ProEvents.Application.Contracts
 
         Task<EventDto[]> GetAllEventsAsync(bool includeSpeakers = false);
         Task<EventDto[]> GetAllEventsByThemeAsync(string theme, bool includeSpeakers = false);
-        Task<EventDto> GetEventsByIdAsync(int eventId ,bool includeSpeakers = false);
+        Task<EventDto> GetEventByIdAsync(int eventId ,bool includeSpeakers = false);
     }
 }

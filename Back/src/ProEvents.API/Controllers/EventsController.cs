@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProEvents.Application.Contracts;
 using ProEvents.Application.Dto;
-using ProEvents.Domain;
 
 namespace ProEvents.API.Controllers;
 
@@ -10,11 +9,12 @@ namespace ProEvents.API.Controllers;
 public class EventsController : ControllerBase
 {
     private readonly IEventService _service;
+    private readonly IWebHostEnvironment _environment;
 
-    private Uri _uri = new("https://localhost:7242/");
-    public EventsController(IEventService service)
+    public EventsController(IEventService service, IWebHostEnvironment environment)
     {
         _service = service;
+        _environment = environment;
     }
 
     [HttpGet]
@@ -40,7 +40,7 @@ public class EventsController : ControllerBase
     {
         try
         {
-            var res = await _service.GetEventsByIdAsync(id, true);
+            var res = await _service.GetEventByIdAsync(id, true);
 
             if (res == null) return NotFound("No event was found");
 
@@ -70,6 +70,35 @@ public class EventsController : ControllerBase
                 $"Error trying to retrieve events. Error: {e.Message}");
         }
     }
+
+
+    [HttpPost("upload-image/{eventId}")]
+    public async Task<IActionResult> UploadImage(int eventId)
+    {
+        try
+        {
+            var res = await _service.GetEventByIdAsync(eventId, true);
+            if (res == null) return BadRequest("Error to create event");
+
+            var file = Request.Form.Files[0];
+            if (file.Length > 0)
+            {
+                DeleteImage(res.ImageURL);
+                res.ImageURL = await SaveImage(file);
+
+            }
+
+            var eventReturn = await _service.UpdateEvent(eventId, res);
+
+            return Ok(eventReturn);
+        }
+        catch (Exception e)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Error trying to create events. Error: {e.Message}");
+        }
+    }
+
 
     [HttpPost]
     public async Task<IActionResult> Post(EventDto model)
@@ -118,5 +147,34 @@ public class EventsController : ControllerBase
             return this.StatusCode(StatusCodes.Status404NotFound,
                 $"Error trying to delete events. Error: {e.Message}");
         }
+    }
+
+    [NonAction]
+    private void DeleteImage(string imageName)
+    {
+        var imagePath = Path.Combine(_environment.ContentRootPath, @"Resources/Images", imageName);
+
+        if (System.IO.File.Exists(imagePath))
+            System.IO.File.Delete(imageName);
+    }
+
+    [NonAction]
+    private async Task<string> SaveImage(IFormFile imageFile)
+    {
+        var imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName)
+            .Take(10)
+            .ToArray()
+        ).Replace(' ', '-');
+
+        imageName = $"{imageName}{DateTime.UtcNow:yymmssfff}{Path.GetExtension(imageFile.FileName)}";
+
+        var imagePath = Path.Combine(_environment.ContentRootPath, @"Resources/Image", imageName);
+
+        using (var fileStream = new FileStream(imagePath, FileMode.Create))
+        {
+            await imageFile.CopyToAsync(fileStream);
+        }
+
+        return imageName;
     }
 }
