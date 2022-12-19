@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment.prod';
 import { Router } from '@angular/router';
 import { Event } from '@app/models/Event';
 import { EventService } from '@app/services/event.service';
@@ -55,6 +56,12 @@ export class EventListComponent implements OnInit {
 
   public changeImg(): void {
     this.showImg = !this.showImg;
+  }
+
+  public showImage(imageURL: string): string {
+    return (imageURL !== '')
+      ? `https://localhost:7242/Resources/Images/${imageURL}`
+      : 'assets/img/noImage.jpg';
   }
 
   public loadEvents(): void {

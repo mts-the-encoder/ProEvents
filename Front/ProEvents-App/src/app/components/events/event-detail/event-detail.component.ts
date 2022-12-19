@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -94,6 +95,8 @@ export class EventDetailComponent implements OnInit {
         next: (event: Event) => {
           this.event = { ...event };
           this.form.patchValue(this.event);
+          if (this.event.imageURL !== '')
+            this.imageURL = `${environment.apiURL}` + 'Resources/Images/' + this.event.imageURL;
           this.loadLots();
         },
         error: (error: any) => {
@@ -125,16 +128,16 @@ export class EventDetailComponent implements OnInit {
       ],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      imageURL: ['', Validators.required],
+      imageURL: [''],
       lots: this.fb.array([]),
     });
   }
 
-  addLot(): void {
+  public addLot(): void {
     this.lots.push(this.createLot({ id: 0 } as Lot));
   }
 
-  createLot(lot: Lot): FormGroup {
+  public createLot(lot: Lot): FormGroup {
     return this.fb.group({
       id: [lot.id],
       name: [lot.name, Validators.required],
@@ -218,8 +221,8 @@ export class EventDetailComponent implements OnInit {
   public loadLots(): void {
     this.lotService.getLotsByEventId(this.eventId).subscribe({
       next: (lotsReturn: Lot[]) => {
-        lotsReturn.forEach(lot => {
-          this.lots.push(this.createLot(lot));
+        lotsReturn.forEach(x => {
+          this.lots.push(this.createLot(x));
         });
       },
       error: (error: any) => {
