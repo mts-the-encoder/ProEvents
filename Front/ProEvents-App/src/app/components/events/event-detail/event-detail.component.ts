@@ -30,6 +30,7 @@ export class EventDetailComponent implements OnInit {
   saveMode = 'post';
   currentLot = { id: 0, name: '', index: 0 };
   imageURL = 'assets/img/upload.png';
+  file!: any;
 
   get editMode(): boolean {
     return this.saveMode === 'put';
@@ -254,6 +255,15 @@ export class EventDetailComponent implements OnInit {
 
   public declineDeleteLot(): void {
     this.modalRef.hide();
+  }
+
+  public onFileChange(ev: any): void {
+    const reader = new FileReader();
+
+    reader.onload = (event: any) => this.imageURL = event.target.result;
+
+    this.file = ev.target.files;
+    reader.readAsDataURL(this.file[0]);
   }
 }
 
