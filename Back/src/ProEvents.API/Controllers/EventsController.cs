@@ -168,7 +168,7 @@ public class EventsController : ControllerBase
 
         imageName = $"{imageName}{DateTime.UtcNow:yymmssfff}{Path.GetExtension(imageFile.FileName)}";
 
-        var imagePath = Path.Combine(_environment.ContentRootPath, @"Resources/Image", imageName);
+        var imagePath = Path.Combine(_environment.ContentRootPath, @"Resources/Images", imageName);
 
         using (var fileStream = new FileStream(imagePath, FileMode.Create))
         {

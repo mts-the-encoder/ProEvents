@@ -1,4 +1,6 @@
-<div class="card rounded shadow-sm">
+<div class="row">
+  <div [ngClass]="{'col-md-8 pr-4': editMode, 'col-md-12': !editMode}">~
+    <div class="card rounded shadow-sm">
   <form class="form-inline" [formGroup]="form">
     <div class="p-3">
       <!-- <p>Form value: {{form.value | json}}</p>
@@ -100,7 +102,6 @@
   </form>
 </div>
 <!---->
-
 <div class="card rounded shadow-sm mt-4" *ngIf="editMode">
   <div class="p-3">
     <div class="d-flex border-bottom justify-content-between">
@@ -124,29 +125,29 @@
               </button>
             </legend>
             <div class="row">
-              <div class="form-group col-md-4 mb-">
+              <div class="form-group col-md-4 mb-2">
                 <label>Name</label>
                 <input [ngClass]="cssValidator(lots.get(i + '.name'))" type="text" class="form-control"
                   formControlName="name" placeholder="Lot" />
               </div>
-              <div class="form-group col-md-4 mb-">
+              <div class="form-group col-md-4 mb-2">
                 <label>Quantity</label>
                 <input [ngClass]="cssValidator(lots.get(i + '.qtd'))" type="text" class="form-control"
                   formControlName="qtd" placeholder="000" />
               </div>
-              <div class="form-group col-md-4 mb-">
+              <div class="form-group col-md-4 mb-2">
                 <label>Price</label>
                 <input [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align:'left' }"
                   [ngClass]="cssValidator(lots.get(i + '.price'))" type="text" currencyMask class="form-control"
                   formControlName="price" placeholder="$ 0,00" />
               </div>
-              <div class="form-group col-md-4 mb-">
+              <div class="form-group col-md-4 mb-2">
                 <label>Start Date</label>
                 <input (bsValueChange)="changeValueData($event, i, 'startDate')"
                 bsDatepicker [bsConfig]="bsConfigLot"
                 type="text" class="form-control" formControlName="startDate" placeholder="01/01/2023" />
               </div>
-              <div class="form-group col-md-4 mb-">
+              <div class="form-group col-md-4 mb-2">
                 <label>End Date</label>
                 <input (bsValueChange)="changeValueData($event, i, 'endDate')"
                 bsDatepicker [bsConfig]="bsConfigLot"
@@ -169,6 +170,8 @@
       </button>
       <button (click)="saveLots()" class="btn btn-success" [disabled]="!form.controls['lots'].valid">Save Lots</button>
     </div>
+  </div>
+</div>
   </div>
 </div>
 <br/>
