@@ -1,8 +1,9 @@
-﻿using ProEvents.Domain.Enum;
+﻿using Microsoft.AspNetCore.Identity;
+using ProEvents.Domain.Enum;
 
 namespace ProEvents.Domain.Identity
 {
-    public class User
+    public class User : IdentityUser<int>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
