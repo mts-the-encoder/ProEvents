@@ -7,7 +7,7 @@ using ProEvents.Domain.Identity;
 namespace ProEvents.Persistence.Context
 {
     public class ProEventsContext : IdentityDbContext<User, Role, int,
-                                                      IdentityUserClaim<int>, IdentityUserRole<int>, 
+                                                      IdentityUserClaim<int>, UserRole, 
                                                       IdentityUserLogin<int>,
                                                       IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
