@@ -1,14 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProEvents.Domain;
+using ProEvents.Domain.Identity;
 
 namespace ProEvents.Persistence.Context
 {
-    public class ProEventsContext : DbContext
+    public class ProEventsContext : IdentityDbContext<User, Role, int,
+                                                      IdentityUserClaim<int>, IdentityUserRole<int>, 
+                                                      IdentityUserLogin<int>,
+                                                      IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public ProEventsContext(DbContextOptions<ProEventsContext> options)
             : base(options) { }
         public DbSet<Event> Events { get; set; }
-        public DbSet<Lot?> Lots { get; set; }
+        public DbSet<Lot> Lots { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<EventSpeaker> EventsSpeakers { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }

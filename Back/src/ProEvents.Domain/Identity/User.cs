@@ -12,6 +12,5 @@ namespace ProEvents.Domain.Identity
         public Function Function { get; set; }
         public string ImageURL { get; set; }
         public IEnumerable<UserRole> UserRoles { get; set; }
-
     }
 }

@@ -24,7 +24,8 @@ namespace ProEvents.Persistence
                 query = query.Include(x => x.EventsSpeakers).ThenInclude(x => x.Event);
 
             query = query.AsNoTracking().OrderBy(x => x.Id)
-                .Where(x => x.Name.ToLower().Contains(name.ToLower()));
+                .Where(x => x.User.FirstName.ToLower().Contains(name.ToLower()) &&
+                            x.User.LastName.ToLower().Contains(name.ToLower()));
 
             return await query.ToArrayAsync();
         }

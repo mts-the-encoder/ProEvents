@@ -120,3 +120,8 @@ C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\
 C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\mnsantos4\Desktop\FullStack\ProEvents\Back\src\ProEvents.Api\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
