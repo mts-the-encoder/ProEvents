@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProEvents.Domain;
 using ProEvents.Persistence.Context;
-using ProEvents.Persistence.contracts;
+using ProEvents.Persistence.Contracts;
 
 namespace ProEvents.Persistence
 {

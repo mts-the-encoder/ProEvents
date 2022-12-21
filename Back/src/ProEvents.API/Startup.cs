@@ -5,7 +5,7 @@ using ProEvents.Application;
 using ProEvents.Application.Contracts;
 using ProEvents.Persistence;
 using ProEvents.Persistence.Context;
-using ProEvents.Persistence.contracts;
+using ProEvents.Persistence.Contracts;
 
 namespace ProEvents.API
 {

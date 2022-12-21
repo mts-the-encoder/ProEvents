@@ -2,7 +2,7 @@
 using ProEvents.Application.Contracts;
 using ProEvents.Application.Dto;
 using ProEvents.Domain;
-using ProEvents.Persistence.contracts;
+using ProEvents.Persistence.Contracts;
 
 namespace ProEvents.Application
 {
