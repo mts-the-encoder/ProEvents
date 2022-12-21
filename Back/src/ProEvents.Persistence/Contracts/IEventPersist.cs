@@ -1,6 +1,6 @@
 ﻿using ProEvents.Domain;
 
-namespace ProEvents.Persistence.contracts
+namespace ProEvents.Persistence.Contracts
 {
     public interface IEventPersist
     {

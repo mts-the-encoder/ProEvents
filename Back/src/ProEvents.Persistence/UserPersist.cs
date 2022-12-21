@@ -1,4 +1,5 @@
-﻿using ProEvents.Domain.Identity;
+﻿using Microsoft.EntityFrameworkCore;
+using ProEvents.Domain.Identity;
 using ProEvents.Persistence.Context;
 using ProEvents.Persistence.Contracts;
 
@@ -13,19 +14,19 @@ namespace ProEvents.Persistence
             _context = context;
         }
 
-        public Task<IEnumerable<User>> GetUsersAsync()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Users.ToListAsync();
         }
 
-        public Task<User> GetUserByAsync(int id)
+        public async Task<User?> GetUserByAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FindAsync(id);
         }
 
-        public Task<User> GetUserByUsernameAsync(string username)
+        public async Task<User?> GetUserByUsernameAsync(string username)
         {
-            throw new NotImplementedException();
+            return await _context.Users.SingleOrDefaultAsync(x => x.UserName == username);
         }
     }
 }
