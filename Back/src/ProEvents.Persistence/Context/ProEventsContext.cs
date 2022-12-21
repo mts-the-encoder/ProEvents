@@ -21,6 +21,18 @@ namespace ProEvents.Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(x => new { x.UserId, x.RoleId });
+
+                userRole.HasOne(x => x.Role)
+                    .WithMany(x => x.UserRoles)
+                    .HasForeignKey(x => x.RoleId)
+                    .IsRequired(); 
+            });
+
             modelBuilder.Entity<EventSpeaker>()
                 .HasKey(x => new { x.EventId, x.SpeakerId });
 
