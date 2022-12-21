@@ -24,9 +24,9 @@ namespace ProEvents.Persistence
             return await _context.Users.FindAsync(id);
         }
 
-        public async Task<User?> GetUserByUsernameAsync(string username)
+        public async Task<User?> GetUserByUserNameAsync(string userName)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.UserName == username);
+            return await _context.Users.SingleOrDefaultAsync(x => x.UserName == userName);
         }
     }
 }
