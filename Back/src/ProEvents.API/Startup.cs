@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using ProEvents.Application;
@@ -26,17 +27,23 @@ namespace ProEvents.API
             services.AddDbContext<ProEventsContext>(context => context
                 .UseSqlite(Configuration.GetConnectionString("Default")));
             services.AddControllers()
-                .AddNewtonsoftJson(x => x.SerializerSettings
+                .AddJsonOptions(options => options.JsonSerializerOptions.Converters
+                    .Add(new JsonStringEnumConverter()))
+                .AddNewtonsoftJson(options => options.SerializerSettings
                     .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<ILotService, LotService>();
-           
+            services.AddScoped<ITokenService,TokenService>();
+            services.AddScoped<IAccountService,AccountService>();
+
             services.AddScoped<IGeneralPersist, GeneralPersist>();
             services.AddScoped<IEventPersist, EventPersist>();
             services.AddScoped<ILotPersist,LotPersist>();
+            services.AddScoped<IUserPersist,UserPersist>();
+
             services.AddCors();
             services.AddSwaggerGen(c =>
             {

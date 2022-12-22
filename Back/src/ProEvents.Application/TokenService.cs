@@ -13,17 +13,15 @@ namespace ProEvents.Application
 {
     public class TokenService : ITokenService
     {
-        private readonly IConfiguration _configuration;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly SymmetricSecurityKey _key;
 
         public TokenService(IConfiguration configuration, UserManager<User> userManager, IMapper mapper)
         {
-            _configuration = configuration;
             _userManager = userManager;
             _mapper = mapper;
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["TokenKey"]));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
         }
         public async Task<string> CreateToken(UserUpdateDto userUpdateDto)
         {
