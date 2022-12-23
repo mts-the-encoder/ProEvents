@@ -24,7 +24,7 @@ public class EventsController : ControllerBase
         {
             var events = await _service.GetAllEventsAsync(true);
 
-            if (events == null) return NoContent();
+            if (events.Length == 0) return NoContent();
 
             return Ok(events);
         }
