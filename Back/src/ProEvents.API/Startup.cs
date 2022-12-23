@@ -99,6 +99,7 @@ namespace ProEvents.API
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseCors(x => x.AllowAnyHeader()
                 .AllowAnyMethod()
