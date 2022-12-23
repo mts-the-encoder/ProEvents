@@ -1,7 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
-
-namespace ProEvents.Application.Dto
+﻿namespace ProEvents.Application.Dto
 {
     public class UserLoginDto
     {

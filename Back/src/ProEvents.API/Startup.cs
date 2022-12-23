@@ -22,10 +22,7 @@ namespace ProEvents.API
             Configuration = configuration;
         }
 
-        private IConfiguration Configuration
-        {
-            get;
-        }
+        private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -34,11 +31,11 @@ namespace ProEvents.API
 
             services.AddIdentityCore<User>(options =>
                 {
-                    options.Password.RequireDigit = true;
+                    options.Password.RequireDigit = false;
                     options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequiredLength = 8;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 6;
                 })
                 .AddRoles<Role>()
                 .AddRoleManager<RoleManager<Role>>()
@@ -70,13 +67,13 @@ namespace ProEvents.API
 
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<ILotService, LotService>();
-            services.AddScoped<ITokenService,TokenService>();
-            services.AddScoped<IAccountService,AccountService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IAccountService, AccountService>();
 
             services.AddScoped<IGeneralPersist, GeneralPersist>();
             services.AddScoped<IEventPersist, EventPersist>();
-            services.AddScoped<ILotPersist,LotPersist>();
-            services.AddScoped<IUserPersist,UserPersist>();
+            services.AddScoped<ILotPersist, LotPersist>();
+            services.AddScoped<IUserPersist, UserPersist>();
 
             services.AddCors();
             services.AddSwaggerGen(c =>

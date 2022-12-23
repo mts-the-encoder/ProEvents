@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProEvents.Application.Contracts;
+using ProEvents.Application.Dto;
 
 namespace ProEvents.API.Controllers
 {
@@ -19,13 +20,63 @@ namespace ProEvents.API.Controllers
         }
 
         [HttpGet("GetUser/{userName}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetUser(string userName)
         {
             try
             {
                 var user = await _accountService.GetUserByUserNameAsync(userName);
                 return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Error trying to retrieve user. Error: {e.Message}");
+            }
+        }
+
+        [HttpPost("Register")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register(UserDto userDto)
+        {
+            try
+            {
+                if (await _accountService.UserExists(userDto.UserName))
+                    return BadRequest("User already exist!");
+
+                var user = await _accountService.CreateAccountAsync(userDto);
+                
+                if (user != null)
+                    return Created("~api/[controller]",user);
+
+                return BadRequest("User has not been created");
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Error trying to retrieve user. Error: {e.Message}");
+            }
+        }
+
+        [HttpPost("Login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(UserLoginDto userLogin)
+        {
+            try
+            {
+                var user = await _accountService.GetUserByUserNameAsync(userLogin.UserName);
+
+                if (user == null) return NotFound("User not found");
+
+                var result = await _accountService.CheckUserPasswordAsync(user, userLogin.Password);
+
+                if (!result.Succeeded) return Unauthorized("Incorrect username or password");
+
+                return Ok(new
+                {
+                    userName = user.UserName,
+                    firstName = user.FirstName,
+                    token = _tokenService.CreateToken(user).Result
+                });
             }
             catch (Exception e)
             {

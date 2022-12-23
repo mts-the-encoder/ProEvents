@@ -4,6 +4,6 @@ namespace ProEvents.Domain.Identity
 {
     public class Role : IdentityRole<int>
     {
-        public IEnumerable<UserRole> UserRoles { get; set; }
+        public List<UserRole> UserRoles { get; set; }
     }
 }
