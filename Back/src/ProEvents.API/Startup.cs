@@ -1,9 +1,11 @@
 ﻿using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using ProEvents.Application;
 using ProEvents.Application.Contracts;
+using ProEvents.Domain.Identity;
 using ProEvents.Persistence;
 using ProEvents.Persistence.Context;
 using ProEvents.Persistence.Contracts;
@@ -26,6 +28,22 @@ namespace ProEvents.API
         {
             services.AddDbContext<ProEventsContext>(context => context
                 .UseSqlite(Configuration.GetConnectionString("Default")));
+
+            services.AddIdentityCore<User>(options =>
+                {
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequiredLength = 8;
+                })
+                .AddRoles<Role>()
+                .AddRoleManager<RoleManager<Role>>()
+                .AddSignInManager<SignInManager<User>>()
+                .AddRoleValidator<RoleValidator<Role>>()
+                .AddEntityFrameworkStores<ProEventsContext>()
+                .AddDefaultTokenProviders();
+
             services.AddControllers()
                 .AddJsonOptions(options => options.JsonSerializerOptions.Converters
                     .Add(new JsonStringEnumConverter()))
