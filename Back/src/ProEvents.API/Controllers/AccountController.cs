@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProEvents.Application.Contracts;
 using ProEvents.Application.Dto;
@@ -19,11 +20,12 @@ namespace ProEvents.API.Controllers
             _tokenService = tokenService;
         }
 
-        [HttpGet("GetUser/{userName}")]
-        public async Task<IActionResult> GetUser(string userName)
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetUser()
         {
             try
             {
+                var userName = User.FindFirst(ClaimTypes.Name)?.Value;
                 var user = await _accountService.GetUserByUserNameAsync(userName);
                 return Ok(user);
             }
