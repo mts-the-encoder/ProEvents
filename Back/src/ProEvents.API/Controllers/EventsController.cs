@@ -1,20 +1,25 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ProEvents.API.Extensions;
 using ProEvents.Application.Contracts;
 using ProEvents.Application.Dto;
 
 namespace ProEvents.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class EventsController : ControllerBase
 {
     private readonly IEventService _service;
     private readonly IWebHostEnvironment _environment;
+    private readonly IAccountService _accountService;
 
-    public EventsController(IEventService service, IWebHostEnvironment environment)
+    public EventsController(IEventService service, IWebHostEnvironment environment, IAccountService accountService)
     {
         _service = service;
         _environment = environment;
+        _accountService = accountService;
     }
 
     [HttpGet]
@@ -22,7 +27,8 @@ public class EventsController : ControllerBase
     {
         try
         {
-            var events = await _service.GetAllEventsAsync(true);
+
+            var events = await _service.GetAllEventsAsync(User.GetUserId(), true);
 
             if (events.Length == 0) return NoContent();
 
@@ -40,7 +46,7 @@ public class EventsController : ControllerBase
     {
         try
         {
-            var res = await _service.GetEventByIdAsync(id, true);
+            var res = await _service.GetEventByIdAsync(User.GetUserId(), id, true);
 
             if (res == null) return NotFound("No event was found");
 
@@ -58,7 +64,7 @@ public class EventsController : ControllerBase
     {
         try
         {
-            var res = await _service.GetAllEventsByThemeAsync(theme, true);
+            var res = await _service.GetAllEventsByThemeAsync(User.GetUserId(), theme, true);
 
             if (res.Length <= 0) return NotFound("Event not found");
 
@@ -77,7 +83,7 @@ public class EventsController : ControllerBase
     {
         try
         {
-            var res = await _service.GetEventByIdAsync(eventId, true);
+            var res = await _service.GetEventByIdAsync(User.GetUserId(), eventId, true);
             if (res == null) return BadRequest("Error to create event");
 
             var file = Request.Form.Files[0];
@@ -88,7 +94,7 @@ public class EventsController : ControllerBase
 
             }
 
-            var eventReturn = await _service.UpdateEvent(eventId, res);
+            var eventReturn = await _service.UpdateEvent(User.GetUserId(), eventId, res);
 
             return Ok(eventReturn);
         }
@@ -105,7 +111,7 @@ public class EventsController : ControllerBase
     {
         try
         {
-            var res = await _service.AddEvents(model);
+            var res = await _service.AddEvents(User.GetUserId(), model);
 
             if (res == null) return BadRequest("Error to create event");
 
@@ -123,7 +129,7 @@ public class EventsController : ControllerBase
     {
         try
         {
-            var res = await _service.UpdateEvent(id, model);
+            var res = await _service.UpdateEvent(User.GetUserId(), id, model);
             if (res == null) return NotFound("No events are found");
             return Ok(res);
         }
@@ -139,9 +145,9 @@ public class EventsController : ControllerBase
     {
         try
         {
-            var res = await _service.GetEventByIdAsync(id, true);
+            var res = await _service.GetEventByIdAsync(User.GetUserId(),id, true);
 
-            if (!await _service.DeleteEvent(id)) throw new Exception("Error to delete event");
+            if (!await _service.DeleteEvent(User.GetUserId(),id)) throw new Exception("Error to delete event");
             
             DeleteImage(res.ImageURL);
             return Ok(new { message = "Deleted" });

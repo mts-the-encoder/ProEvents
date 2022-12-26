@@ -33,7 +33,8 @@ namespace ProEvents.Application.Dto
             ErrorMessage = "Please enter a valid e-mail address")]  //Only 4fun
         public string Email { get; set; }
         //[DataType(DataType.Password)]
-
+        public int UserId { get; set; }
+        public UserDto? UserDto { get; set; }
         public IEnumerable<LotDto>? Lots { get; set; }
         public IEnumerable<SocialMediaDto>? SocialMedias { get; set; }
         public IEnumerable<SpeakerDto>? EventsSpeakers { get; set; }

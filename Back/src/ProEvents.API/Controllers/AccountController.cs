@@ -55,7 +55,27 @@ namespace ProEvents.API.Controllers
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Error trying to retrieve user. Error: {e.Message}");
+                    $"Error trying to register user. Error: {e.Message}");
+            }
+        }
+
+        [HttpPut("UpdateUser")]
+        public async Task<IActionResult> Register(UserUpdateDto userDto)
+        {
+            try
+            {
+                var user = await _accountService.GetUserByUserNameAsync(userDto.UserName);
+                if (user == null) return NotFound("User not found!");
+
+                var userReturn = await _accountService.UpdateAccount(userDto);
+                if (userReturn == null) return NoContent();
+
+                return Ok(userReturn);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Error trying to update user. Error: {e.Message}");
             }
         }
 
@@ -83,7 +103,7 @@ namespace ProEvents.API.Controllers
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Error trying to retrieve user. Error: {e.Message}");
+                    $"Error trying to Login user. Error: {e.Message}");
             }
         }
     }
