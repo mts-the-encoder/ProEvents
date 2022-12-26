@@ -37,7 +37,7 @@ namespace ProEvents.Application
             }
         }
 
-        public async Task<UserUpdateDto> GetUserByUserNameAsync(string userName)
+        public async Task<UserUpdateDto> GetUserByUserNameAsync(string? userName)
         {
             try
             {

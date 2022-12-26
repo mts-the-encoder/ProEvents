@@ -13,15 +13,17 @@ namespace ProEvents.Application
 {
     public class TokenService : ITokenService
     {
+        private readonly IConfiguration _config;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly SymmetricSecurityKey _key;
 
-        public TokenService(IConfiguration configuration, UserManager<User> userManager, IMapper mapper)
+        public TokenService(IConfiguration config, UserManager<User> userManager, IMapper mapper)
         {
+            _config = config;
             _userManager = userManager;
             _mapper = mapper;
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
         public async Task<string> CreateToken(UserUpdateDto userUpdateDto)
         {
@@ -29,8 +31,8 @@ namespace ProEvents.Application
 
             var claims = new List<Claim>
             {
-                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName)
             };
 
             var roles = await _userManager.GetRolesAsync(user);

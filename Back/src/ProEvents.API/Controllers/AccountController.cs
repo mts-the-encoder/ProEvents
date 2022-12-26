@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProEvents.API.Extensions;
 using ProEvents.Application.Contracts;
@@ -21,6 +22,7 @@ namespace ProEvents.API.Controllers
         }
 
         [HttpGet("GetUser")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUser()
         {
             try
@@ -60,11 +62,11 @@ namespace ProEvents.API.Controllers
         }
 
         [HttpPut("UpdateUser")]
-        public async Task<IActionResult> Register(UserUpdateDto userDto)
+        public async Task<IActionResult> UpdateUser(UserUpdateDto userDto)
         {
             try
             {
-                var user = await _accountService.GetUserByUserNameAsync(userDto.UserName);
+                var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
                 if (user == null) return NotFound("User not found!");
 
                 var userReturn = await _accountService.UpdateAccount(userDto);
@@ -97,7 +99,7 @@ namespace ProEvents.API.Controllers
                 {
                     userName = user.UserName,
                     firstName = user.FirstName,
-                    token = _tokenService.CreateToken(user).Result
+                    token = "Bearer " + _tokenService.CreateToken(user).Result
                 });
             }
             catch (Exception e)

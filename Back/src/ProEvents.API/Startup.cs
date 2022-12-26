@@ -48,6 +48,7 @@ namespace ProEvents.API
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
+                    Configuration.Bind("JwtBearer",options);
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
@@ -83,7 +84,6 @@ namespace ProEvents.API
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = @"JWT Auth header with Bearer
-
                                     Example: Bearer 1234abcd",
                     Name = "Authorization",
                     In = ParameterLocation.Header,

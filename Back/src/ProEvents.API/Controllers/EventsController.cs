@@ -27,7 +27,6 @@ public class EventsController : ControllerBase
     {
         try
         {
-
             var events = await _service.GetAllEventsAsync(User.GetUserId(), true);
 
             if (events.Length == 0) return NoContent();
