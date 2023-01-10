@@ -6,7 +6,6 @@ using ProEvents.Application.Dto;
 
 namespace ProEvents.API.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class EventsController : ControllerBase

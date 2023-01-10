@@ -1,5 +1,5 @@
 import { Event } from './../models/Event';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -7,11 +7,14 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class EventService {
   baseURL = environment.apiURL + 'api/events';
+  tokenHeader = new HttpHeaders({ 'Authorization': 'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwidW5pcXVlX25hbWUiOiJtdHMiLCJuYmYiOjE2NzMzNTI2ODgsImV4cCI6MTY3MzQzOTA4OCwiaWF0IjoxNjczMzUyNjg4fQ.2nbUn0tKERiGTnLGLkwrngE-NXJagd_v-B8182BuQRYebPplc2K9w71DyOV7JTQqUFLQuFY2MbIJwOivJDTUng' });
+
+
   constructor(private http: HttpClient) { }
 
   public getEvent(): Observable<Event[]> {
     return this.http
-      .get<Event[]>(this.baseURL)
+      .get<Event[]>(this.baseURL, { headers: this.tokenHeader })
       .pipe(take(1));
   }
 
