@@ -1,17 +1,33 @@
 <div class="d-flex align-items-center vh-90 mt-5">
   <div class="mx-auto text-center shadow p-3 mb-5 bg-white rounded mt-lg-5">
-    <form class="form-check form-signin">
+    <form #loginForm="ngForm" class="form-check form-signin" (ngSubmit)="login()">
       <i class="fa fa-rocket mb-2 fa-2xl mb-4 logo"></i>
       <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
       <label for="username" class="sr-only">User</label>
-      <input type="email" id="username" class="form-control" placeholder="User" name="username" required>
+      <input
+        [(ngModel)]="model.userName"
+        type="email"
+        id="username"
+        class="form-control"
+        placeholder="User"
+        name="username"
+        required
+      >
       <div class="input-group mb-3 mt-3">
-        <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" placeholder="Password" />
+        <input
+          [(ngModel)]="model.password"
+          name="password"
+          [type]="fieldTextType ? 'text' : 'password'"
+          class="form-control"
+          id="password"
+          placeholder="Password"
+          required
+        />
         <span class="input-group-text span" id="basic-addon2">
           <i class="fa border-0" [ngClass]="{'fa-eye-slash': fieldTextType, 'fa-eye': !fieldTextType}" (click)="toggleFieldTextType()"></i>
         </span>
       </div>
-      <button class="btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
+      <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
       <p class="mt-4 mb-2 text-muted">New to ProEvents? Create an account.</p>
       <a class="btn btn-lg btn-link btn-block" routerLink="/user/registration">Sign up</a>
     </form>
