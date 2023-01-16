@@ -22,7 +22,8 @@ public class LotsController : ControllerBase
         {
             var lots = await _service.GetLotsByEventIdAsync(eventId);
 
-            if (lots is { Length: 0 }) return NoContent();
+            if (lots is { Length: 0 })
+                return NoContent();
 
 
             return Ok(lots);
@@ -35,11 +36,11 @@ public class LotsController : ControllerBase
     }
 
     [HttpPut("{eventId}")]
-    public async Task<IActionResult> Put(int eventId, LotDto[] models)
+    public async Task<IActionResult> Put(int eventId,LotDto[] models)
     {
         try
         {
-            var lot = await _service.SaveLot(eventId, models);
+            var lot = await _service.SaveLot(eventId,models);
             return Ok(lot);
         }
         catch (Exception e)
@@ -50,14 +51,18 @@ public class LotsController : ControllerBase
     }
 
     [HttpDelete("{eventId}/{lotId}")]
-    public async Task<IActionResult> Delete(int eventId, int lotId)
+    public async Task<IActionResult> Delete(int eventId,int lotId)
     {
         try
         {
-            var lot = await _service.GetLotByIdAsync(eventId, lotId);
+            var lot = await _service.GetLotByIdAsync(eventId,lotId);
 
-            if (lot != null) await _service.Delete(lot.EventId, lot.Id);
-            return Ok(new { message = "Lot Deleted" });
+            if (lot != null)
+                await _service.Delete(lot.EventId,lot.Id);
+            return Ok(new
+            {
+                message = "Lot Deleted"
+            });
         }
         catch (Exception e)
         {
