@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class EventService {
   baseURL = environment.apiURL + 'api/events';
-  tokenHeader = new HttpHeaders({ 'Authorization': 'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwidW5pcXVlX25hbWUiOiJtdHMiLCJuYmYiOjE2NzM4Nzc1MjksImV4cCI6MTY3Mzk2MzkyOSwiaWF0IjoxNjczODc3NTI5fQ.B3G5kFGEW0Cw5tWXKoxNJdLutuim1a4t727bQlnXHhqGnRBMSL7D0Z4RAuEgaWVaOrG3za5N-qXJLgjC87skOw' });
+  tokenHeader = new HttpHeaders({ 'Authorization': '' });
 
 
   constructor(private http: HttpClient) { }
